@@ -514,6 +514,22 @@ int main (void)
 	// Set pins as inputs / outputs / enable pullups etc
 	PinConfig();
 
+	// Set initial state from light sensor
+	//  - Use the door position sensors to determine initial door position, and raise/lower as necessary
+	// FIXME: ADC check reversed for sensor layout on 1.01 board
+	if (adc0 < adc1)
+	{
+		time_of_day = DAY;
+		door_action_time = DoorControl(RAISE);				// Won't move if already in position
+	}
+	else
+	{
+		time_of_day = NIGHT;
+		door_action_time = DoorControl(LOWER);				// Won't move if already in position
+	}
+
+	door_action = NOTHING;
+
 	// Initialise OSCCAL to centre point of it's range before the initial calibration
 	OSCCAL = (0x7F / 2);
 
@@ -548,22 +564,6 @@ int main (void)
 		sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc1, adc2, adc8);
 		USART_SendString(Buffer);
 	}
-
-	// Set initial state from light sensor
-	//  - Use the door position sensors to determine initial door position, and raise/lower as necessary
-	// FIXME: ADC check reversed for sensor layout on 1.01 board
-	if (adc0 < adc1)
-	{
-		time_of_day = DAY;
-		door_action_time = DoorControl(RAISE);				// Won't move if already in position
-	}
-	else
-	{
-		time_of_day = NIGHT;
-		door_action_time = DoorControl(LOWER);				// Won't move if already in position
-	}
-
-	door_action = NOTHING;
 
 	while(1)
 	{
@@ -710,4 +710,5 @@ int main (void)
 		// Enable pullups on door/debug sensors
 		EnablePinPullups(1);
 	}
+	return (0);
 }
