@@ -1,0 +1,333 @@
+# EESchema Netlist Version 1.1 created  Thu 02 Sep 2010 10:31:58 BST
+(
+ ( /4C40CA4E CP_5x11mm C1 CP1
+  ( 1 +BATT )
+  ( 2 GND )
+ )
+ ( /4C40C851 CP_5x11mm C2 CP1
+  ( 1 +3.3V )
+  ( 2 GND )
+ )
+ ( /4C4D77B1 C1 C3 C
+  ( 1 GND )
+  ( 2 +3.3V )
+ )
+ ( /4C4D5B33 C1 C4 C
+  ( 1 N-000004 )
+  ( 2 GND )
+ )
+ ( /4C4D5B4E C1 C5 C
+  ( 1 N-000012 )
+  ( 2 GND )
+ )
+ ( /4C49AB69 C1 C6 C
+  ( 1 N-000003 )
+  ( 2 GND )
+ )
+ ( /4C49AF57 C1 C7 C
+  ( 1 N-000041 )
+  ( 2 GND )
+ )
+ ( /4C4AB11A D4 D1 DIODESCH
+  ( 1 /A01 )
+  ( 2 +BATT )
+ )
+ ( /4C4AB135 D4 D2 DIODESCH
+  ( 1 GND )
+  ( 2 /A01 )
+ )
+ ( /4C4AB117 D4 D3 DIODESCH
+  ( 1 /A02 )
+  ( 2 +BATT )
+ )
+ ( /4C4AB134 D4 D4 DIODESCH
+  ( 1 GND )
+  ( 2 /A02 )
+ )
+ ( /4C4AB10F D4 D5 DIODESCH
+  ( 1 /B02 )
+  ( 2 +BATT )
+ )
+ ( /4C4AB132 D4 D6 DIODESCH
+  ( 1 GND )
+  ( 2 /B02 )
+ )
+ ( /4C4AB11E D4 D7 DIODESCH
+  ( 1 /B01 )
+  ( 2 +BATT )
+ )
+ ( /4C4AB0EA D4 D8 DIODESCH
+  ( 1 GND )
+  ( 2 /B01 )
+ )
+ ( /4C49ABBA INDUCTOR_V L1 INDUCTOR
+  ( 1 +3.3V )
+  ( 2 N-000041 )
+ )
+ ( /4C513272 XBee-Pro MOD1 XBEE-00
+  ( 1 +3.3V )
+  ( 2 N-000039 )
+  ( 3 N-000038 )
+  ( 4 ? )
+  ( 5 ? )
+  ( 6 ? )
+  ( 7 ? )
+  ( 8 ? )
+  ( 9 N-000018 )
+  ( 10 GND )
+  ( 11 ? )
+  ( 12 N-000015 )
+  ( 13 ? )
+  ( 14 ? )
+  ( 15 ? )
+  ( 16 ? )
+  ( 17 ? )
+  ( 18 ? )
+  ( 19 ? )
+  ( 20 ? )
+ )
+ ( /4C4AAF20 TB6612FNG_MOD MOD2 TB6612FNG_MOD
+  ( 1 +BATT )
+  ( 2 +3.3V )
+  ( 3 GND )
+  ( 4 /A01 )
+  ( 5 /A02 )
+  ( 6 /B02 )
+  ( 7 /B01 )
+  ( 8 GND )
+  ( 9 GND )
+  ( 10 N-000045 )
+  ( 11 N-000013 )
+  ( 12 N-000036 )
+  ( 13 N-000040 )
+  ( 14 N-000036 )
+  ( 15 N-000013 )
+  ( 16 N-000045 )
+ )
+ ( /4C4CA5B0 bornier4 P1 BATTERY
+  ( 1 GND )
+  ( 2 N-000006 )
+  ( 3 N-000006 )
+  ( 4 +BATT )
+ )
+ ( /4C4F56C2 bornier2 P2 LIGHT
+  ( 1 N-000001 )
+  ( 2 GND )
+ )
+ ( /4C4CA6E0 bornier4 P3 D_SWITCH
+  ( 1 N-000007 )
+  ( 2 GND )
+  ( 3 N-000005 )
+  ( 4 GND )
+ )
+ ( /4C4CA059 bornier4 P4 D_SENSOR
+  ( 1 N-000044 )
+  ( 2 GND )
+  ( 3 N-000002 )
+  ( 4 GND )
+ )
+ ( /4C4CA686 SIL-2 P5 DEBUG
+  ( 1 GND )
+  ( 2 N-000042 )
+ )
+ ( /4C4AB00F bornier4 P6 D_MOTOR
+  ( 1 /A01 )
+  ( 2 /A02 )
+  ( 3 /B02 )
+  ( 4 /B01 )
+ )
+ ( /4C4D5BDF PINTST P7 SCOPE
+  ( 1 N-000043 )
+ )
+ ( /4C7EBB99 TO92-SGD Q1 MOSFET_P
+  ( D N-000025 )
+  ( G N-000024 )
+  ( S +BATT )
+ )
+ ( /4C7EBBB1 TO92-SGD Q2 MOSFET_N
+  ( D N-000024 )
+  ( G N-000023 )
+  ( S GND )
+ )
+ ( /4C49B363 R4 R1 10K
+  ( 1 N-000035 )
+  ( 2 +3.3V )
+ )
+ ( /4C7EBEE6 R1 R2 4.7K
+  ( 1 N-000024 )
+  ( 2 +BATT )
+ )
+ ( /4C7EBCEE R1 R3 1K
+  ( 1 N-000046 )
+  ( 2 N-000023 )
+ )
+ ( /4C4D6DF1 R1 R4 10K
+  ( 1 N-000027 )
+  ( 2 N-000025 )
+ )
+ ( /4C4D6DF5 R1 R5 10K
+  ( 1 GND )
+  ( 2 N-000027 )
+ )
+ ( /4C4D6B85 R1 R6 10K
+  ( 1 N-000001 )
+  ( 2 N-000046 )
+ )
+ ( /4C4D6D3C TRIMPOT RV1 POT
+  ( 1 GND )
+  ( 2 N-000026 )
+  ( 3 N-000046 )
+ )
+ ( /4C48C4FF DIP-8__300 U1 MAX604
+  ( 1 +BATT )
+  ( 2 GND )
+  ( 3 GND )
+  ( 4 +BATT )
+  ( 5 GND )
+  ( 6 GND )
+  ( 7 GND )
+  ( 8 +3.3V )
+ )
+ ( /4C49B32B DIP-28__300 U2 ATMEGA88-PA
+  ( 1 N-000035 )
+  ( 2 N-000039 )
+  ( 3 N-000038 )
+  ( 4 N-000007 )
+  ( 5 N-000005 )
+  ( 6 N-000040 )
+  ( 7 +3.3V )
+  ( 8 GND )
+  ( 9 N-000004 )
+  ( 10 N-000012 )
+  ( 11 N-000044 )
+  ( 12 N-000002 )
+  ( 13 N-000042 )
+  ( 14 N-000043 )
+  ( 15 N-000045 )
+  ( 16 N-000018 )
+  ( 17 N-000036 )
+  ( 18 N-000015 )
+  ( 19 N-000013 )
+  ( 20 N-000003 )
+  ( 21 N-000041 )
+  ( 22 GND )
+  ( 23 N-000001 )
+  ( 24 N-000026 )
+  ( 25 N-000027 )
+  ( 26 ? )
+  ( 27 ? )
+  ( 28 N-000046 )
+ )
+ ( /4C4D5B47 SIL-2 X1 CRYSTAL
+  ( 1 N-000012 )
+  ( 2 N-000004 )
+ )
+)
+*
+{ Allowed footprints by component:
+$component C1
+ CP*
+ SM*
+$endlist
+$component C2
+ CP*
+ SM*
+$endlist
+$component C3
+ SM*
+ C?
+ C1-1
+$endlist
+$component C4
+ SM*
+ C?
+ C1-1
+$endlist
+$component C5
+ SM*
+ C?
+ C1-1
+$endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
+$component C7
+ SM*
+ C?
+ C1-1
+$endlist
+$component D1
+ D?
+ S*
+$endlist
+$component D2
+ D?
+ S*
+$endlist
+$component D3
+ D?
+ S*
+$endlist
+$component D4
+ D?
+ S*
+$endlist
+$component D5
+ D?
+ S*
+$endlist
+$component D6
+ D?
+ S*
+$endlist
+$component D7
+ D?
+ S*
+$endlist
+$component D8
+ D?
+ S*
+$endlist
+$component MOD1
+ XBee-00
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component R4
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component R5
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$endfootprintlist
+}

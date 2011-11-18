@@ -1,0 +1,9 @@
+PCBNEW-LibDoc----V1  Thu 29 Jul 2010 00:11:50 BST
+#
+$MODULE TB6612FNG_MOD
+Li TB6612FNG_MOD
+Cd 16 pins DIL package, round pads
+Kw DIL
+$EndMODULE
+#
+$EndLIBDOC

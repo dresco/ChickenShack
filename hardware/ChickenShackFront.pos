@@ -1,0 +1,7 @@
+### Module positions - created on Sat 11 Sep 2010 13:18:26 BST ###
+### Printed by PcbNew version pcbnew (2010-05-09 BZR 2366)-stable
+## Unit = inches, Angle = deg.
+## Side : Front
+# Ref    Val                  PosX       PosY        Rot     Side
+RV1      POT                  5.3000     5.3500      90.0    Front
+## End

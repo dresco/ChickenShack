@@ -1,0 +1,262 @@
+Cmp-Mod V01 Created by CvPCB (2010-05-09 BZR 2366)-stable date = Thu 02 Sep 2010 10:31:58 BST
+
+BeginCmp
+TimeStamp = /4C40CA4E;
+Reference = C1;
+ValeurCmp = CP1;
+IdModule  = CP_5x11mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C40C851;
+Reference = C2;
+ValeurCmp = CP1;
+IdModule  = CP_5x11mm;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D77B1;
+Reference = C3;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D5B33;
+Reference = C4;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D5B4E;
+Reference = C5;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C49AB69;
+Reference = C6;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C49AF57;
+Reference = C7;
+ValeurCmp = C;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB11A;
+Reference = D1;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB135;
+Reference = D2;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB117;
+Reference = D3;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB134;
+Reference = D4;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB10F;
+Reference = D5;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB132;
+Reference = D6;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB11E;
+Reference = D7;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB0EA;
+Reference = D8;
+ValeurCmp = DIODESCH;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C49ABBA;
+Reference = L1;
+ValeurCmp = INDUCTOR;
+IdModule  = INDUCTOR_V;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C513272;
+Reference = MOD1;
+ValeurCmp = XBEE-00;
+IdModule  = XBee-Pro;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AAF20;
+Reference = MOD2;
+ValeurCmp = TB6612FNG_MOD;
+IdModule  = TB6612FNG_MOD;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4CA5B0;
+Reference = P1;
+ValeurCmp = BATTERY;
+IdModule  = bornier4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4F56C2;
+Reference = P2;
+ValeurCmp = LIGHT;
+IdModule  = bornier2;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4CA6E0;
+Reference = P3;
+ValeurCmp = D_SWITCH;
+IdModule  = bornier4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4CA059;
+Reference = P4;
+ValeurCmp = D_SENSOR;
+IdModule  = bornier4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4CA686;
+Reference = P5;
+ValeurCmp = DEBUG;
+IdModule  = SIL-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4AB00F;
+Reference = P6;
+ValeurCmp = D_MOTOR;
+IdModule  = bornier4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D5BDF;
+Reference = P7;
+ValeurCmp = SCOPE;
+IdModule  = PINTST;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C7EBB99;
+Reference = Q1;
+ValeurCmp = MOSFET_P;
+IdModule  = TO92-SGD;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C7EBBB1;
+Reference = Q2;
+ValeurCmp = MOSFET_N;
+IdModule  = TO92-SGD;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C49B363;
+Reference = R1;
+ValeurCmp = 10K;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C7EBEE6;
+Reference = R2;
+ValeurCmp = 4.7K;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C7EBCEE;
+Reference = R3;
+ValeurCmp = 1K;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D6DF1;
+Reference = R4;
+ValeurCmp = 10K;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D6DF5;
+Reference = R5;
+ValeurCmp = 10K;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D6B85;
+Reference = R6;
+ValeurCmp = 10K;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D6D3C;
+Reference = RV1;
+ValeurCmp = POT;
+IdModule  = TRIMPOT;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C48C4FF;
+Reference = U1;
+ValeurCmp = MAX604;
+IdModule  = DIP-8__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C49B32B;
+Reference = U2;
+ValeurCmp = ATMEGA88-PA;
+IdModule  = DIP-28__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /4C4D5B47;
+Reference = X1;
+ValeurCmp = CRYSTAL;
+IdModule  = SIL-2;
+EndCmp
+
+EndListe
