@@ -51,9 +51,10 @@
 #define DOOR_ACTION_TIMEOUT_UP		7						// FIXME: Perhaps change to 8 seconds for next update....
 #define DOOR_ACTION_TIMEOUT_DOWN	5						// FIXME: ...but this has been dropped from 6 to 5 instead
 #define DOOR_INTERVAL_ITERATIONS	96 						// Processing intervals must elapse between door events - 8hrs
-#define TEMPERATURE_OFFSET			273						// Convert K to C, plus manually adjusted for offset
 #define DEBUG_ENABLED (!(PIND & (1 << 7)))
-//#define DEBUG_ENABLED 1
+
+//#define TEMPERATURE_ENABLED									// Comment out to remove experimental temperature reporting
+//#define TEMPERATURE_OFFSET			343						// Convert K to C, plus manually adjusted for offset
 
 #define DAY		0											// time_of_day
 #define NIGHT	1
@@ -85,10 +86,16 @@ void ADCRead (uint16_t* chan0, uint16_t* chan1, uint16_t* chan2, uint16_t* chan8
 	static uint16_t average_adc0[ADC_SAMPLES];
 	static uint16_t average_adc1[ADC_SAMPLES];
 	static uint16_t average_adc2[ADC_SAMPLES];
+#ifdef TEMPERATURE_ENABLED
+	static uint16_t average_adc8[ADC_SAMPLES];
+#endif
 
 	static uint8_t	average_adc0_index = 0;
 	static uint8_t	average_adc1_index = 0;
 	static uint8_t	average_adc2_index = 0;
+#ifdef TEMPERATURE_ENABLED
+	static uint8_t	average_adc8_index = 0;
+#endif
 
 	uint16_t		average_adc_sum;
 	uint16_t		average_adc_result;
@@ -169,10 +176,14 @@ void ADCRead (uint16_t* chan0, uint16_t* chan1, uint16_t* chan2, uint16_t* chan8
 
 	*chan2 = average_adc_result;							// Save conversion result
 
+#ifdef TEMPERATURE_ENABLED
 	// Channel 8 - on chip temperature measurement
+	//  work in progress - voltage changes on other ADC channels seem to massively affect this reading.
+	//  trying a delay before/after changing the voltage reference, also throwing away the first conversion result
 
-	// ADMUX |= (1<<REFS0);									// Use Internal 1.1V Voltage Reference with external capacitor at AREF pin
-	// ADMUX |= (1<<REFS1);									// - not working, capacitor resisting change in AREF voltage?
+	ADMUX |= (1<<REFS0);									// Use Internal 1.1V Voltage Reference with external capacitor at AREF pin
+	ADMUX |= (1<<REFS1);									// - not working, capacitor resisting change in AREF voltage?
+	_delay_ms(100);											// FIXME: Short delay to help the voltage settle help?
 
 	ADMUX  &= ~(1 << MUX0);									// Clear MUX bits
 	ADMUX  &= ~(1 << MUX1);									//
@@ -190,10 +201,24 @@ void ADCRead (uint16_t* chan0, uint16_t* chan1, uint16_t* chan2, uint16_t* chan8
 	ADCSRA |= (1 << ADSC);									// Start ADC conversion
 	while(ADCSRA & (1<<ADSC));								// Wait for conversion to finish
 
-	*chan8 = ADC;											// Save result
+	// average out the readings
+	average_adc8[average_adc8_index++] = ADC;
 
-	// ADMUX |= (1<<REFS0);									// Use AVcc with external capacitor at AREF pin
-	// ADMUX &= ~(1<<REFS1);								//
+	if (average_adc8_index >= ADC_SAMPLES)
+		average_adc8_index = 0;
+
+	average_adc_sum = 0;
+	for (average_adc_count = 0; average_adc_count < ADC_SAMPLES;  average_adc_count++)
+	   average_adc_sum = average_adc_sum + average_adc8[average_adc_count];
+
+	average_adc_result = average_adc_sum / ADC_SAMPLES;
+
+	*chan8 = average_adc_result;							// Save conversion result
+
+	ADMUX |= (1<<REFS0);									// Revert to AVcc with external capacitor at AREF pin
+	ADMUX &= ~(1<<REFS1);									//
+	_delay_ms(100);											// FIXME: Short delay to help the voltage settle help?
+#endif
 
 	ADCSRA &= ~(1 << ADEN);									// Disable the ADC
 
@@ -277,10 +302,6 @@ void TimerSetup(void)
 
 	// Reset timer 2 counter (perhaps do this after stablised?)
 	TCNT2  = 0;
-
-	// Use external 32.768kHz clock instead of a crystal (STK500)
-	// - NOW SET IN MAIN (for here and osccal routine)
-	// ASSR |= (1 << EXCLK);
 
 	// Set timer 2 to asyncronous mode (32.768KHz crystal)
 	//  - should already be in async mode from osccal routine
@@ -500,19 +521,29 @@ ISR(PCINT2_vect)
 int main (void)
 {
 	char Buffer[64];
-	//int8_t  temperature;
-	uint8_t time_of_day, door_position, door_action, door_action_time;
-	uint16_t adc0, adc1, adc2, adc8;						// raw ADC readings
+	uint8_t time_of_day, door_position, door_action_time, door_action = NOTHING;
+	uint16_t adc0, adc1, adc2, adc8 = 0;						// raw ADC readings
 	uint16_t i, battery;
 	uint16_t door_interval_countdown = 0;
 	char str_batteryV[5];
+#ifdef TEMPERATURE_ENABLED
+	int8_t  temperature;
+#endif
 
 	// *** TODO: STK500 configuration - not required for standalone design ***
 	// Use external 32.768kHz clock instead of a crystal
 	// ASSR |= (1 << EXCLK);
 
-	// Set pins as inputs / outputs / enable pullups etc
-	PinConfig();
+    // Make sure all clock division is turned off (8MHz RC clock)
+    CLKPR  = (1 << CLKPCE);
+    CLKPR  = 0x00;
+
+	PinConfig();											// Set pins as inputs / outputs / enable pullups etc
+	ADCSetup();
+
+	// Get initial ADC readings, call enough times to pre-fill the averaging arrays
+	for (i=0; i < ADC_SAMPLES; i++)
+		ADCRead(&adc0, &adc1, &adc2, &adc8);
 
 	// Set initial state from light sensor
 	//  - Use the door position sensors to determine initial door position, and raise/lower as necessary
@@ -528,20 +559,19 @@ int main (void)
 		door_action_time = DoorControl(LOWER);				// Won't move if already in position
 	}
 
-	door_action = NOTHING;
-
 	// Initialise OSCCAL to centre point of it's range before the initial calibration
 	OSCCAL = (0x7F / 2);
 
 	// Calibrate the internal oscillator for reliable serial comms (resets timer 2)
 	OSCCAL_Calibrate();
 
-	USART_Setup();
-	ADCSetup();
-	TimerSetup();
-	PinChangeIntSetup();
+	TimerSetup();											// Restart timer 2 - async
 
+	USART_Setup();
+	PinChangeIntSetup();
+	set_sleep_mode(SLEEP_MODE_PWR_SAVE);					// Set POWER SAVE sleep mode
 	wdt_enable(WDTO_8S);									// Enable watchdog timer - 8 second timeout...
+	sei();													// Enable global interrupts
 
 	if (DEBUG_ENABLED)
 	{
@@ -550,14 +580,6 @@ int main (void)
 		sprintf(Buffer, "DEBUG: F_CPU: %lu, OSCCAL: %i, MCUSR: %i\n", F_CPU, OSCCAL, mcusr_mirror);
 		USART_SendString(Buffer);
 	}
-
-	sei();													// Enable global interrupts
-
-	set_sleep_mode(SLEEP_MODE_PWR_SAVE);					// Set POWER SAVE sleep mode
-
-	// Get initial ADC readings, call enough times to pre-fill the averaging arrays
-	for (i=0; i < ADC_SAMPLES; i++)
-		ADCRead(&adc0, &adc1, &adc2, &adc8);
 
 	if (DEBUG_ENABLED)
 	{
@@ -595,7 +617,9 @@ int main (void)
 
 			// Calculate the temperature in degrees C
 			// FIXME: optimise this formula, 1mV/degree C. 1.1V reference, 0-1023 raw values
-			// temperature = ((adc8 * 1100UL) / (1024)) - TEMPERATURE_OFFSET;
+#ifdef TEMPERATURE_ENABLED
+			temperature = adc8 - TEMPERATURE_OFFSET;
+#endif
 
 			// Get the door position
 			if (!(PIND & (1 << 5)))
@@ -611,8 +635,11 @@ int main (void)
 				USART_SendString(Buffer);
 				sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc1, adc2, adc8);
 				USART_SendString(Buffer);
-//				sprintf(Buffer, "DEBUG: battery voltage: %s, time of day: %i, temperature: %i%cC\n", str_batteryV, time_of_day, temperature, 0xf8);
+#ifdef TEMPERATURE_ENABLED
+				sprintf(Buffer, "DEBUG: battery voltage: %s, time of day: %i, temperature: %i%cC\n", str_batteryV, time_of_day, temperature, 0xf8);
+#else
 				sprintf(Buffer, "DEBUG: battery voltage: %s, time of day: %i\n", str_batteryV, time_of_day);
+#endif
 				USART_SendString(Buffer);
 				sprintf(Buffer, "DEBUG: door position: %i, door interval countdown: %u\n", door_position, door_interval_countdown);
 				USART_SendString(Buffer);
