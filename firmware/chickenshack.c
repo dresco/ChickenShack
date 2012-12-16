@@ -55,6 +55,7 @@
 
 //#define TEMPERATURE_ENABLED									// Comment out to remove experimental temperature reporting
 //#define TEMPERATURE_OFFSET			343						// Convert K to C, plus manually adjusted for offset
+//#define RUNTIME_OSCCAL										// Comment out to remove runtime OSCCAL calibration via 32kHz crsytal
 
 #define DAY		0											// time_of_day
 #define NIGHT	1
@@ -473,6 +474,7 @@ void UnsignedToDecimalString4(uint16_t input, char * output_string)
 
 		default:
 			*output_string = 0x0;
+			break;
 	}
 }
 
@@ -559,11 +561,15 @@ int main (void)
 		door_action_time = DoorControl(LOWER);				// Won't move if already in position
 	}
 
+#ifdef RUNTIME_OSCCAL
 	// Initialise OSCCAL to centre point of it's range before the initial calibration
 	OSCCAL = (0x7F / 2);
 
 	// Calibrate the internal oscillator for reliable serial comms (resets timer 2)
 	OSCCAL_Calibrate();
+#else
+	OSCCAL = 113;											// Typical historical value
+#endif
 
 	TimerSetup();											// Restart timer 2 - async
 
@@ -593,8 +599,10 @@ int main (void)
 		{
 			timer_interval = 0;
 
+#ifdef RUNTIME_OSCCAL
 			// Calibrate the internal oscillator for reliable serial comms (resets timer 2 so do it asap after rollover)
 			OSCCAL_Calibrate();
+#endif
 
 			// Restart timer2
 			//  - Note: We lose a bit of time here with the recalibration, but have
