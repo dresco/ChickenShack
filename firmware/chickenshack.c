@@ -55,7 +55,10 @@
 
 //#define TEMPERATURE_ENABLED									// Comment out to remove experimental temperature reporting
 //#define TEMPERATURE_OFFSET			343						// Convert K to C, plus manually adjusted for offset
-//#define RUNTIME_OSCCAL										// Comment out to remove runtime OSCCAL calibration via 32kHz crsytal
+//#define RUNTIME_OSCCAL										// Comment out to remove runtime OSCCAL calibration via 32kHz crystal
+																//   - if the crystal circuit fails, we may never get past the initial
+																//     calibration routine and therefore never setup the watchdog timer
+																//     FIXME: try to move the watchdog setup before the initial calibration
 
 #define DAY		0											// time_of_day
 #define NIGHT	1
