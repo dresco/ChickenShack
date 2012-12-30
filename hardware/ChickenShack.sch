@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 01 Sep 2010 22:07:03 BST
+EESchema Schematic File Version 2  date Sun 30 Dec 2012 09:07:04 GMT
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -34,12 +34,13 @@ LIBS:atmega88-pa
 LIBS:tb6612fng_mod
 LIBS:XBee
 LIBS:ChickenShack-cache
-EELAYER 24  0
+EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
+encoding utf-8
 Sheet 1 1
 Title ""
-Date "1 sep 2010"
+Date "30 dec 2012"
 Rev ""
 Comp ""
 Comment1 ""
@@ -47,6 +48,9 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Connection ~ 10700 2650
+Wire Wire Line
+	9350 2650 10700 2650
 Wire Wire Line
 	7700 1000 7650 1000
 Connection ~ 8200 1350
@@ -226,7 +230,6 @@ Wire Wire Line
 Connection ~ 10450 3700
 Wire Wire Line
 	10700 3700 10700 3450
-Connection ~ 10700 2550
 Connection ~ 10250 3700
 Wire Wire Line
 	10450 3450 10450 3700
@@ -274,15 +277,9 @@ Wire Wire Line
 Wire Wire Line
 	6800 2550 6800 3850
 Wire Wire Line
-	10450 3050 10450 2650
-Wire Wire Line
-	10450 2650 9350 2650
-Wire Wire Line
 	10700 1650 10700 1050
 Wire Wire Line
 	10700 3050 10700 2250
-Wire Wire Line
-	9350 2550 10700 2550
 Wire Wire Line
 	7650 5200 7250 5200
 Wire Wire Line
@@ -438,6 +435,10 @@ Wire Wire Line
 	9350 1550 9350 1050
 Wire Wire Line
 	9350 1050 9750 1050
+Wire Wire Line
+	10450 3050 10450 2550
+Wire Wire Line
+	10450 2550 9350 2550
 $Comp
 L R R2
 U 1 1 4C7EBEE6
@@ -661,7 +662,7 @@ M_ENABLE
 Text GLabel 9800 5400 2    50   Input ~ 0
 M_ENABLE
 Text Notes 9050 3500 0    50   ~ 0
-TODO: FIX PIN ASSIGNMENT
+TODO:
 Text GLabel 9700 2950 2    50   Input ~ 0
 UP
 Text GLabel 9700 2850 2    50   Input ~ 0
