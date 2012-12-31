@@ -1,38 +1,5 @@
-EESchema Schematic File Version 2  date Sun 30 Dec 2012 09:07:04 GMT
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:special
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:max604
-LIBS:atmega88-pa
-LIBS:tb6612fng_mod
-LIBS:XBee
+EESchema Schematic File Version 2  date Mon 31 Dec 2012 10:18:49 GMT
+LIBS:dresco
 LIBS:ChickenShack-cache
 EELAYER 25  0
 EELAYER END
@@ -40,7 +7,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "30 dec 2012"
+Date "31 dec 2012"
 Rev ""
 Comp ""
 Comment1 ""
@@ -48,6 +15,24 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+$Comp
+L ATMEGA48/88/168/328-AU U?
+U 1 1 50E16640
+P 12950 3400
+F 0 "U?" H 12900 3500 50  0000 L BNN
+F 1 "ATMEGA48/88/168/328-AU" H 12450 3670 50  0000 L BNN
+	1    12950 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L MCP1702 U?
+U 1 1 50E16625
+P 12950 1500
+F 0 "U?" H 13100 1304 60  0000 C CNN
+F 1 "MCP1702" H 12950 1700 60  0000 C CNN
+	1    12950 1500
+	1    0    0    -1  
+$EndComp
 Connection ~ 10700 2650
 Wire Wire Line
 	9350 2650 10700 2650
