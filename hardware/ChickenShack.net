@@ -1,272 +1,258 @@
-# EESchema Netlist Version 1.1 created  Sun 30 Dec 2012 09:07:10 GMT
+# EESchema Netlist Version 1.1 created  Tue 01 Jan 2013 23:17:33 GMT
 (
- ( /4C7EBEE6 $noname  R2 4.7K {Lib=R}
-  (    1 N-000026 )
-  (    2 +BATT )
+ ( /50E2D297 SMD0805 C1 1uF
+  ( 1 +BATT )
+  ( 2 GND )
  )
- ( /4C7EBCEE $noname  R3 1K {Lib=R}
-  (    1 N-000046 )
-  (    2 N-000024 )
+ ( /50E2D2A0 SMD0805 C2 1uF
+  ( 1 +3.3V )
+  ( 2 GND )
  )
- ( /4C7EBBB1 $noname  Q2 MOSFET_N {Lib=MOSFET_N}
-  (    D N-000026 )
-  (    G N-000024 )
-  (    S GND )
+ ( /50E19DBE SMD0805 C3 0.1uF
+  ( 1 N-000008 )
+  ( 2 GND )
  )
- ( /4C7EBB99 $noname  Q1 MOSFET_P {Lib=MOSFET_P}
-  (    D N-000027 )
-  (    G N-000026 )
-  (    S +BATT )
+ ( /50E19DBB SMD0805 C4 22pF
+  ( 1 GND )
+  ( 2 N-000007 )
  )
- ( /4C513272 XBee-00  MOD1 XBEE-00 {Lib=XBEE-00}
-  (    1 +3.3V )
-  (    2 DOUT )
-  (    3 DIN )
-  (    4 ? )
-  (    5 ? )
-  (    6 ? )
-  (    7 ? )
-  (    8 ? )
-  (    9 RADIO_SLEEP )
-  (   10 GND )
-  (   11 ? )
-  (   12 RADIO_CTS )
-  (   13 ? )
-  (   14 ? )
-  (   15 ? )
-  (   16 ? )
-  (   17 ? )
-  (   18 ? )
-  (   19 ? )
-  (   20 ? )
+ ( /50E19DC2 SMD0805 C5 0.1uF
+  ( 1 +3.3V )
+  ( 2 GND )
  )
- ( /4C4D6DF1 $noname  R4 10K {Lib=R}
-  (    1 N-000030 )
-  (    2 N-000027 )
+ ( /50E19DBA SMD0805 C6 22pF
+  ( 1 GND )
+  ( 2 N-000005 )
  )
- ( /4C4F56C2 $noname  P2 LIGHT {Lib=CONN_2}
-  (    1 N-000001 )
-  (    2 GND )
+ ( /50E19DC1 SMD0805 C7 0.1uF
+  ( 1 +3.3V )
+  ( 2 GND )
  )
- ( /4C4D77B1 $noname  C3 C {Lib=C}
-  (    1 GND )
-  (    2 +3.3V )
+ ( /50E19DBF SMD0805 C8 0.1uF
+  ( 1 N-000009 )
+  ( 2 GND )
  )
- ( /4C4D6DF5 $noname  R5 10K {Lib=R}
-  (    1 GND )
-  (    2 N-000030 )
+ ( /4C4AB11A SOD123 D1 DIODESCH
+  ( 1 /A01 )
+  ( 2 +BATT )
  )
- ( /4C4D6D3C $noname  RV1 POT {Lib=POT}
-  (    1 GND )
-  (    2 N-000029 )
-  (    3 N-000046 )
+ ( /4C4AB135 SOD123 D2 DIODESCH
+  ( 1 GND )
+  ( 2 /A01 )
  )
- ( /4C4D6B85 $noname  R6 10K {Lib=R}
-  (    1 N-000001 )
-  (    2 N-000046 )
+ ( /4C4AB117 SOD123 D3 DIODESCH
+  ( 1 /A02 )
+  ( 2 +BATT )
  )
- ( /4C4CA059 $noname  P4 D_SENSOR {Lib=CONN_4}
-  (    1 N-000028 )
-  (    2 GND )
-  (    3 N-000002 )
-  (    4 GND )
+ ( /4C4AB134 SOD123 D4 DIODESCH
+  ( 1 GND )
+  ( 2 /A02 )
  )
- ( /4C4D5B47 $noname  X1 CRYSTAL {Lib=CRYSTAL}
-  (    1 N-000013 )
-  (    2 N-000005 )
+ ( /4C4AB10F SOD123 D5 DIODESCH
+  ( 1 /B02 )
+  ( 2 +BATT )
  )
- ( /4C4D5B33 $noname  C4 C {Lib=C}
-  (    1 N-000005 )
-  (    2 GND )
+ ( /4C4AB132 SOD123 D6 DIODESCH
+  ( 1 GND )
+  ( 2 /B02 )
  )
- ( /4C49B32B $noname  U2 ATMEGA88-PA {Lib=ATMEGA88-PA}
-  (    1 N-000037 )
-  (    2 DOUT )
-  (    3 DIN )
-  (    4 N-000009 )
-  (    5 N-000006 )
-  (    6 M_ENABLE )
-  (    7 +3.3V )
-  (    8 GND )
-  (    9 N-000005 )
-  (   10 N-000013 )
-  (   11 N-000028 )
-  (   12 N-000002 )
-  (   13 N-000043 )
-  (   14 N-000044 )
-  (   15 PWM )
-  (   16 RADIO_SLEEP )
-  (   17 UP )
-  (   18 RADIO_CTS )
-  (   19 DOWN )
-  (   20 N-000004 )
-  (   21 N-000003 )
-  (   22 GND )
-  (   23 N-000001 )
-  (   24 N-000029 )
-  (   25 N-000030 )
-  (   26 ? )
-  (   27 ? )
-  (   28 N-000046 )
+ ( /4C4AB11E SOD123 D7 DIODESCH
+  ( 1 /B01 )
+  ( 2 +BATT )
  )
- ( /4C4D5BDF $noname  P7 SCOPE {Lib=CONNECTOR}
-  (    1 N-000044 )
+ ( /4C4AB0EA SOD123 D8 DIODESCH
+  ( 1 GND )
+  ( 2 /B01 )
  )
- ( /4C4D5B4E $noname  C5 C {Lib=C}
-  (    1 N-000013 )
-  (    2 GND )
+ ( /50E1C24F PIN_ARRAY_3X2 ISP1 AVR-ISP-6
+  ( 1 MISO )
+  ( 2 +3.3V )
+  ( 3 SCK )
+  ( 4 MOSI )
+  ( 5 RST )
+  ( 6 GND )
  )
- ( /4C4CA6E0 $noname  P3 D_SWITCH {Lib=CONN_4}
-  (    1 N-000009 )
-  (    2 GND )
-  (    3 N-000006 )
-  (    4 GND )
+ ( /50E19DC0 SMD0805 L1 INDUCTOR
+  ( 1 +3.3V )
+  ( 2 N-000009 )
  )
- ( /4C4CA686 $noname  P5 DEBUG {Lib=CONN_2}
-  (    1 GND )
-  (    2 N-000043 )
+ ( /4C4AAF20 TB6612FNG_MOD MOD1 TB6612FNG_MOD
+  ( 1 +BATT )
+  ( 2 +3.3V )
+  ( 3 GND )
+  ( 4 /A01 )
+  ( 5 /A02 )
+  ( 6 /B02 )
+  ( 7 /B01 )
+  ( 8 GND )
+  ( 9 GND )
+  ( 10 PWM )
+  ( 11 DOWN )
+  ( 12 UP )
+  ( 13 M_ENABLE )
+  ( 14 UP )
+  ( 15 DOWN )
+  ( 16 PWM )
  )
- ( /4C4CA5B0 $noname  P1 BATTERY {Lib=CONN_4}
-  (    1 GND )
-  (    2 N-000008 )
-  (    3 N-000008 )
-  (    4 +BATT )
+ ( /50E2E742 XBee-Pro MOD2 XBEE
+  ( 1 +3.3V )
+  ( 2 DOUT )
+  ( 3 DIN )
+  ( 4 ? )
+  ( 5 ? )
+  ( 6 ? )
+  ( 7 ? )
+  ( 8 ? )
+  ( 9 RADIO_SLEEP )
+  ( 10 GND )
+  ( 11 ? )
+  ( 12 RADIO_CTS )
+  ( 13 ? )
+  ( 14 ? )
+  ( 15 ? )
+  ( 16 ? )
+  ( 17 ? )
+  ( 18 ? )
+  ( 19 ? )
+  ( 20 ? )
  )
- ( /4C4AB135 $noname  D2 DIODESCH {Lib=DIODESCH}
-  (    1 GND )
-  (    2 /A01 )
+ ( /4C4CA5B0 $noname$ P1 BATTERY
+  ( 1 GND )
+  ( 2 N-000042 )
+  ( 3 N-000042 )
+  ( 4 +BATT )
  )
- ( /4C4AB134 $noname  D4 DIODESCH {Lib=DIODESCH}
-  (    1 GND )
-  (    2 /A02 )
+ ( /50E2E7E2 PIN_X1 P2 CONN_1
+  ( 1 SPARE )
  )
- ( /4C4AB132 $noname  D6 DIODESCH {Lib=DIODESCH}
-  (    1 GND )
-  (    2 /B02 )
+ ( /50E2E7E8 PIN_X1 P3 CONN_1
+  ( 1 SCOPE )
  )
- ( /4C4AB11E $noname  D7 DIODESCH {Lib=DIODESCH}
-  (    1 /B01 )
-  (    2 +BATT )
+ ( /50E1A091 PIN_ARRAY_2X1 P4 DEBUG
+  ( 1 DEBUG )
+  ( 2 GND )
  )
- ( /4C4AB11A $noname  D1 DIODESCH {Lib=DIODESCH}
-  (    1 /A01 )
-  (    2 +BATT )
+ ( /4C4AB00F $noname$ P5 D_MOTOR
+  ( 1 /A01 )
+  ( 2 /A02 )
+  ( 3 /B02 )
+  ( 4 /B01 )
  )
- ( /4C4AB117 $noname  D3 DIODESCH {Lib=DIODESCH}
-  (    1 /A02 )
-  (    2 +BATT )
+ ( /50E1A383 $noname$ P6 LIGHT
+  ( 1 N-000051 )
+  ( 2 GND )
  )
- ( /4C4AB10F $noname  D5 DIODESCH {Lib=DIODESCH}
-  (    1 /B02 )
-  (    2 +BATT )
+ ( /50E19FF7 $noname$ P7 D_SENSOR
+  ( 1 N-000004 )
+  ( 2 GND )
+  ( 3 N-000002 )
+  ( 4 GND )
  )
- ( /4C4AB0EA $noname  D8 DIODESCH {Lib=DIODESCH}
-  (    1 GND )
-  (    2 /B01 )
+ ( /50E1A12C $noname$ P8 D_SWITCH
+  ( 1 N-000003 )
+  ( 2 GND )
+  ( 3 N-000006 )
+  ( 4 GND )
  )
- ( /4C4AB00F $noname  P6 D_MOTOR {Lib=CONN_4}
-  (    1 /A01 )
-  (    2 /A02 )
-  (    3 /B02 )
-  (    4 /B01 )
+ ( /50E1A2AF SOT23 Q1 MOSFET_N
+  ( D N-000015 )
+  ( G N-000014 )
+  ( S GND )
  )
- ( /4C4AAF20 $noname  MOD2 TB6612FNG_MOD {Lib=TB6612FNG_MOD}
-  (    1 +BATT )
-  (    2 +3.3V )
-  (    3 GND )
-  (    4 /A01 )
-  (    5 /A02 )
-  (    6 /B02 )
-  (    7 /B01 )
-  (    8 GND )
-  (    9 GND )
-  (   10 PWM )
-  (   11 DOWN )
-  (   12 UP )
-  (   13 M_ENABLE )
-  (   14 UP )
-  (   15 DOWN )
-  (   16 PWM )
+ ( /50E1A2B0 SOT23 Q2 MOSFET_P
+  ( D +BATT )
+  ( G N-000015 )
+  ( S N-000016 )
  )
- ( /4C49B363 $noname  R1 10K {Lib=R}
-  (    1 N-000037 )
-  (    2 +3.3V )
+ ( /50E19DC5 SMD0805 R1 10K
+  ( 1 +3.3V )
+  ( 2 RST )
  )
- ( /4C49AF57 $noname  C7 C {Lib=C}
-  (    1 N-000004 )
-  (    2 GND )
+ ( /50E1A55D SMD0805 R2 10K
+  ( 1 N-000051 )
+  ( 2 N-000052 )
  )
- ( /4C49ABBA $noname  L1 INDUCTOR {Lib=INDUCTOR}
-  (    1 +3.3V )
-  (    2 N-000004 )
+ ( /50E1A2AE SMD0805 R3 1K
+  ( 1 N-000052 )
+  ( 2 N-000014 )
  )
- ( /4C49AB69 $noname  C6 C {Lib=C}
-  (    1 N-000003 )
-  (    2 GND )
+ ( /50E1A2AD SMD0805 R4 4.7K
+  ( 1 N-000015 )
+  ( 2 +BATT )
  )
- ( /4C48C4FF $noname  U1 MAX604 {Lib=MAX604}
-  (    1 +BATT )
-  (    2 GND )
-  (    3 GND )
-  (    4 +BATT )
-  (    5 GND )
-  (    6 GND )
-  (    7 GND )
-  (    8 +3.3V )
+ ( /50E1A5F5 SMD0805 R5 10K
+  ( 1 N-000046 )
+  ( 2 N-000016 )
  )
- ( /4C40CA4E $noname  C1 CP1 {Lib=CP1}
-  (    1 +BATT )
-  (    2 GND )
+ ( /50E1A5F6 SMD0805 R6 10K
+  ( 1 GND )
+  ( 2 N-000046 )
  )
- ( /4C40C851 $noname  C2 CP1 {Lib=CP1}
-  (    1 +3.3V )
-  (    2 GND )
+ ( /50E1A50E $noname$ RV1 POT
+  ( 1 GND )
+  ( 2 N-000025 )
+  ( 3 N-000052 )
+ )
+ ( /50E16625 SOT89 U1 MCP1702
+  ( GND GND )
+  ( VI +BATT )
+  ( VO +3.3V )
+ )
+ ( /50E19DB8 TQFP-32-80 U2 ATMEGA88-AU
+  ( 1 N-000006 )
+  ( 2 M_ENABLE )
+  ( 3 GND )
+  ( 4 +3.3V )
+  ( 5 GND )
+  ( 6 +3.3V )
+  ( 7 N-000007 )
+  ( 8 N-000005 )
+  ( 9 N-000004 )
+  ( 10 N-000002 )
+  ( 11 DEBUG )
+  ( 12 PWM )
+  ( 13 UP )
+  ( 14 DOWN )
+  ( 15 MOSI )
+  ( 16 MISO )
+  ( 17 SCK )
+  ( 18 N-000009 )
+  ( 19 N-000025 )
+  ( 20 N-000008 )
+  ( 21 GND )
+  ( 22 N-000046 )
+  ( 23 N-000052 )
+  ( 24 RADIO_SLEEP )
+  ( 25 RADIO_CTS )
+  ( 26 SPARE )
+  ( 27 SCOPE )
+  ( 28 N-000051 )
+  ( 29 RST )
+  ( 30 DOUT )
+  ( 31 DIN )
+  ( 32 N-000003 )
+ )
+ ( /50E19DBC SM_XTAL_3.2x1.5 X1 CRYSTAL
+  ( 1 N-000005 )
+  ( 2 N-000007 )
  )
 )
 *
 { Allowed footprints by component:
-$component R2
- R?
- SM0603
- SM0805
- R?-*
- SM1206
+$component C1
+ SM*
+ C?
+ C1-1
 $endlist
-$component R3
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component MOD1
- XBee-00
-$endlist
-$component R4
- R?
- SM0603
- SM0805
- R?-*
- SM1206
+$component C2
+ SM*
+ C?
+ C1-1
 $endlist
 $component C3
  SM*
  C?
  C1-1
-$endlist
-$component R5
- R?
- SM0603
- SM0805
- R?-*
- SM1206
-$endlist
-$component R6
- R?
- SM0603
- SM0805
- R?-*
- SM1206
 $endlist
 $component C4
  SM*
@@ -278,11 +264,38 @@ $component C5
  C?
  C1-1
 $endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
+$component C7
+ SM*
+ C?
+ C1-1
+$endlist
+$component C8
+ SM*
+ C?
+ C1-1
+$endlist
+$component D1
+ D?
+ S*
+$endlist
 $component D2
  D?
  S*
 $endlist
+$component D3
+ D?
+ S*
+$endlist
 $component D4
+ D?
+ S*
+$endlist
+$component D5
  D?
  S*
 $endlist
@@ -294,215 +307,54 @@ $component D7
  D?
  S*
 $endlist
-$component D1
- D?
- S*
-$endlist
-$component D3
- D?
- S*
-$endlist
-$component D5
- D?
- S*
-$endlist
 $component D8
  D?
  S*
+$endlist
+$component MOD2
+ XBee
+ XBee-Pro
 $endlist
 $component R1
  R?
  SM0603
  SM0805
  R?-*
- SM1206
 $endlist
-$component C7
- SM*
- C?
- C1-1
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
 $endlist
-$component C6
- SM*
- C?
- C1-1
+$component R3
+ R?
+ SM0603
+ SM0805
+ R?-*
 $endlist
-$component C1
- CP*
- SM*
+$component R4
+ R?
+ SM0603
+ SM0805
+ R?-*
 $endlist
-$component C2
- CP*
- SM*
+$component R5
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+ R?-*
+$endlist
+$component U1
+ SOT89
+ SOT-23A
+ TO92-INVERT
 $endlist
 $endfootprintlist
 }
-{ Pin List by Nets
-Net 1 "" ""
- U2 23
- P2 1
- R6 1
-Net 2 "" ""
- P4 3
- U2 12
-Net 3 "" ""
- U2 21
- C6 1
-Net 4 "" ""
- L1 2
- C7 1
- U2 20
-Net 5 "" ""
- C4 1
- X1 2
- U2 9
-Net 6 "" ""
- U2 5
- P3 3
-Net 8 "" ""
- P1 2
- P1 3
-Net 9 "" ""
- P3 1
- U2 4
-Net 13 "" ""
- U2 10
- C5 1
- X1 1
-Net 14 "DOWN" "DOWN"
- MOD2 15
- U2 19
- MOD2 11
-Net 16 "RADIO_CTS" "RADIO_CTS"
- MOD1 12
- U2 18
-Net 19 "RADIO_SLEEP" "RADIO_SLEEP"
- U2 16
- MOD1 9
-Net 24 "" ""
- Q2 G
- R3 2
-Net 25 "+BATT" "+BATT"
- D5 2
- D3 2
- D1 2
- D7 2
- C1 1
- U1 4
- U1 1
- MOD2 1
- R2 2
- Q1 S
- P1 4
-Net 26 "" ""
- R2 1
- Q2 D
- Q1 G
-Net 27 "" ""
- R4 2
- Q1 D
-Net 28 "" ""
- U2 11
- P4 1
-Net 29 "" ""
- RV1 2
- U2 24
-Net 30 "" ""
- R5 2
- R4 1
- U2 25
-Net 36 "+3.3V" "+3.3V"
- MOD1 1
- MOD2 2
- R1 2
- C2 1
- C3 2
- U2 7
- U1 8
- L1 1
-Net 37 "" ""
- U2 1
- R1 1
-Net 38 "UP" "UP"
- MOD2 12
- U2 17
- MOD2 14
-Net 39 "GND" "GND"
- MOD2 3
- MOD2 8
- MOD2 9
- U1 2
- U1 6
- U1 7
- C1 2
- C2 2
- U1 5
- Q2 S
- P2 2
- U1 3
- C7 2
- C3 1
- R5 1
- RV1 1
- P1 1
- D8 1
- P5 1
- P3 4
- P3 2
- P4 4
- D6 1
- C4 2
- D4 1
- U2 22
- U2 8
- D2 1
- C6 2
- MOD1 10
- C5 2
- P4 2
-Net 40 "DIN" "DIN"
- MOD1 3
- U2 3
-Net 41 "DOUT" "DOUT"
- U2 2
- MOD1 2
-Net 42 "M_ENABLE" "M_ENABLE"
- MOD2 13
- U2 6
-Net 43 "" ""
- U2 13
- P5 2
-Net 44 "" ""
- P7 1
- U2 14
-Net 45 "PWM" "PWM"
- MOD2 16
- MOD2 10
- U2 15
-Net 46 "" ""
- U2 28
- R6 2
- RV1 3
- R3 1
-Net 47 "/B01" "B01"
- D8 2
- P6 4
- D7 1
- MOD2 7
-Net 48 "/B02" "B02"
- MOD2 6
- D5 1
- P6 3
- D6 2
-Net 49 "/A02" "A02"
- D3 1
- D4 2
- P6 2
- MOD2 5
-Net 50 "/A01" "A01"
- D2 2
- D1 1
- P6 1
- MOD2 4
-}
-#End

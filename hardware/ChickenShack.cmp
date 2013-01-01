@@ -1,262 +1,283 @@
-Cmp-Mod V01 Created by CvPCB (2010-05-09 BZR 2366)-stable date = Thu 02 Sep 2010 10:31:58 BST
+Cmp-Mod V01 Created by CvPcb (2012-01-19 BZR 3256)-stable date = Tue 01 Jan 2013 23:17:33 GMT
 
 BeginCmp
-TimeStamp = /4C40CA4E;
+TimeStamp = /50E2D297;
 Reference = C1;
-ValeurCmp = CP1;
-IdModule  = CP_5x11mm;
+ValeurCmp = 1uF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C40C851;
+TimeStamp = /50E2D2A0;
 Reference = C2;
-ValeurCmp = CP1;
-IdModule  = CP_5x11mm;
+ValeurCmp = 1uF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D77B1;
+TimeStamp = /50E19DBE;
 Reference = C3;
-ValeurCmp = C;
-IdModule  = C1;
+ValeurCmp = 0.1uF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D5B33;
+TimeStamp = /50E19DBB;
 Reference = C4;
-ValeurCmp = C;
-IdModule  = C1;
+ValeurCmp = 22pF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D5B4E;
+TimeStamp = /50E19DC2;
 Reference = C5;
-ValeurCmp = C;
-IdModule  = C1;
+ValeurCmp = 0.1uF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C49AB69;
+TimeStamp = /50E19DBA;
 Reference = C6;
-ValeurCmp = C;
-IdModule  = C1;
+ValeurCmp = 22pF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C49AF57;
+TimeStamp = /50E19DC1;
 Reference = C7;
-ValeurCmp = C;
-IdModule  = C1;
+ValeurCmp = 0.1uF;
+IdModule  = SMD0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E19DBF;
+Reference = C8;
+ValeurCmp = 0.1uF;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB11A;
 Reference = D1;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB135;
 Reference = D2;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB117;
 Reference = D3;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB134;
 Reference = D4;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB10F;
 Reference = D5;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB132;
 Reference = D6;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB11E;
 Reference = D7;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB0EA;
 Reference = D8;
 ValeurCmp = DIODESCH;
-IdModule  = D4;
+IdModule  = SOD123;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C49ABBA;
+TimeStamp = /50E1C24F;
+Reference = ISP1;
+ValeurCmp = AVR-ISP-6;
+IdModule  = PIN_ARRAY_3X2;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E19DC0;
 Reference = L1;
 ValeurCmp = INDUCTOR;
-IdModule  = INDUCTOR_V;
-EndCmp
-
-BeginCmp
-TimeStamp = /4C513272;
-Reference = MOD1;
-ValeurCmp = XBEE-00;
-IdModule  = XBee-Pro;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AAF20;
-Reference = MOD2;
+Reference = MOD1;
 ValeurCmp = TB6612FNG_MOD;
 IdModule  = TB6612FNG_MOD;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E2E742;
+Reference = MOD2;
+ValeurCmp = XBEE;
+IdModule  = XBee-Pro;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4CA5B0;
 Reference = P1;
 ValeurCmp = BATTERY;
-IdModule  = bornier4;
+IdModule  = ;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4F56C2;
+TimeStamp = /50E2E7E2;
 Reference = P2;
-ValeurCmp = LIGHT;
-IdModule  = bornier2;
+ValeurCmp = CONN_1;
+IdModule  = PIN_X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4CA6E0;
+TimeStamp = /50E2E7E8;
 Reference = P3;
-ValeurCmp = D_SWITCH;
-IdModule  = bornier4;
+ValeurCmp = CONN_1;
+IdModule  = PIN_X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4CA059;
+TimeStamp = /50E1A091;
 Reference = P4;
-ValeurCmp = D_SENSOR;
-IdModule  = bornier4;
-EndCmp
-
-BeginCmp
-TimeStamp = /4C4CA686;
-Reference = P5;
 ValeurCmp = DEBUG;
-IdModule  = SIL-2;
+IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
 TimeStamp = /4C4AB00F;
-Reference = P6;
+Reference = P5;
 ValeurCmp = D_MOTOR;
-IdModule  = bornier4;
+IdModule  = ;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D5BDF;
+TimeStamp = /50E1A383;
+Reference = P6;
+ValeurCmp = LIGHT;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E19FF7;
 Reference = P7;
-ValeurCmp = SCOPE;
-IdModule  = PINTST;
+ValeurCmp = D_SENSOR;
+IdModule  = ;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C7EBB99;
+TimeStamp = /50E1A12C;
+Reference = P8;
+ValeurCmp = D_SWITCH;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E1A2AF;
 Reference = Q1;
-ValeurCmp = MOSFET_P;
-IdModule  = TO92-SGD;
-EndCmp
-
-BeginCmp
-TimeStamp = /4C7EBBB1;
-Reference = Q2;
 ValeurCmp = MOSFET_N;
-IdModule  = TO92-SGD;
+IdModule  = SOT23;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C49B363;
+TimeStamp = /50E1A2B0;
+Reference = Q2;
+ValeurCmp = MOSFET_P;
+IdModule  = SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E19DC5;
 Reference = R1;
 ValeurCmp = 10K;
-IdModule  = R4;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C7EBEE6;
+TimeStamp = /50E1A55D;
 Reference = R2;
-ValeurCmp = 4.7K;
-IdModule  = R1;
+ValeurCmp = 10K;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C7EBCEE;
+TimeStamp = /50E1A2AE;
 Reference = R3;
 ValeurCmp = 1K;
-IdModule  = R1;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D6DF1;
+TimeStamp = /50E1A2AD;
 Reference = R4;
-ValeurCmp = 10K;
-IdModule  = R1;
+ValeurCmp = 4.7K;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D6DF5;
+TimeStamp = /50E1A5F5;
 Reference = R5;
 ValeurCmp = 10K;
-IdModule  = R1;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D6B85;
+TimeStamp = /50E1A5F6;
 Reference = R6;
 ValeurCmp = 10K;
-IdModule  = R1;
+IdModule  = SMD0805;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D6D3C;
+TimeStamp = /50E1A50E;
 Reference = RV1;
 ValeurCmp = POT;
-IdModule  = TRIMPOT;
+IdModule  = ;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C48C4FF;
+TimeStamp = /50E16625;
 Reference = U1;
-ValeurCmp = MAX604;
-IdModule  = DIP-8__300;
+ValeurCmp = MCP1702;
+IdModule  = SOT89;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C49B32B;
+TimeStamp = /50E19DB8;
 Reference = U2;
-ValeurCmp = ATMEGA88-PA;
-IdModule  = DIP-28__300;
+ValeurCmp = ATMEGA88-AU;
+IdModule  = TQFP-32-80;
 EndCmp
 
 BeginCmp
-TimeStamp = /4C4D5B47;
+TimeStamp = /50E19DBC;
 Reference = X1;
 ValeurCmp = CRYSTAL;
-IdModule  = SIL-2;
+IdModule  = SM_XTAL_3.2x1.5;
 EndCmp
 
 EndListe
