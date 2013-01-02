@@ -1,4 +1,4 @@
-# EESchema Netlist Version 1.1 created  Tue 01 Jan 2013 23:17:33 GMT
+# EESchema Netlist Version 1.1 created  Wed 02 Jan 2013 19:28:51 GMT
 (
  ( /50E2D297 SMD0805 C1 1uF
   ( 1 +BATT )
@@ -64,6 +64,14 @@
   ( 1 GND )
   ( 2 /B01 )
  )
+ ( /50E4899F HOLE_3.2MM H1 HOLE
+ )
+ ( /50E489A6 HOLE_3.2MM H2 HOLE
+ )
+ ( /50E489AA HOLE_3.2MM H3 HOLE
+ )
+ ( /50E489AE HOLE_3.2MM H4 HOLE
+ )
  ( /50E1C24F PIN_ARRAY_3X2 ISP1 AVR-ISP-6
   ( 1 MISO )
   ( 2 +3.3V )
@@ -116,39 +124,39 @@
   ( 19 ? )
   ( 20 ? )
  )
- ( /4C4CA5B0 $noname$ P1 BATTERY
+ ( /4C4CA5B0 SCREW_TERMINAL_2.54MM_X4 P1 BATTERY
   ( 1 GND )
   ( 2 N-000042 )
   ( 3 N-000042 )
   ( 4 +BATT )
  )
- ( /50E2E7E2 PIN_X1 P2 CONN_1
+ ( /50E2E7E2 PIN_X1 P2 SPARE
   ( 1 SPARE )
  )
- ( /50E2E7E8 PIN_X1 P3 CONN_1
+ ( /50E2E7E8 PIN_X1 P3 SCOPE
   ( 1 SCOPE )
  )
  ( /50E1A091 PIN_ARRAY_2X1 P4 DEBUG
   ( 1 DEBUG )
   ( 2 GND )
  )
- ( /4C4AB00F $noname$ P5 D_MOTOR
+ ( /4C4AB00F SCREW_TERMINAL_2.54MM_X4 P5 D_MOTOR
   ( 1 /A01 )
   ( 2 /A02 )
   ( 3 /B02 )
   ( 4 /B01 )
  )
- ( /50E1A383 $noname$ P6 LIGHT
+ ( /50E1A383 SCREW_TERMINAL_2.54MM_X2 P6 LIGHT
   ( 1 N-000051 )
   ( 2 GND )
  )
- ( /50E19FF7 $noname$ P7 D_SENSOR
+ ( /50E19FF7 SCREW_TERMINAL_2.54MM_X4 P7 D_SENSOR
   ( 1 N-000004 )
   ( 2 GND )
   ( 3 N-000002 )
   ( 4 GND )
  )
- ( /50E1A12C $noname$ P8 D_SWITCH
+ ( /50E1A12C SCREW_TERMINAL_2.54MM_X4 P8 D_SWITCH
   ( 1 N-000003 )
   ( 2 GND )
   ( 3 N-000006 )
@@ -188,7 +196,7 @@
   ( 1 GND )
   ( 2 N-000046 )
  )
- ( /50E1A50E $noname$ RV1 POT
+ ( /50E1A50E TRIMPOT_4MM RV1 POT
   ( 1 GND )
   ( 2 N-000025 )
   ( 3 N-000052 )

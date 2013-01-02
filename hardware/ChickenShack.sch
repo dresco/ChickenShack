@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 01 Jan 2013 13:43:58 GMT
+EESchema Schematic File Version 2  date Wed 02 Jan 2013 22:36:13 GMT
 LIBS:dresco
 LIBS:ChickenShack-cache
 EELAYER 25  0
@@ -7,7 +7,7 @@ $Descr A3 16535 11700
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "1 jan 2013"
+Date "2 jan 2013"
 Rev "2.00"
 Comp ""
 Comment1 "Released under Creative Commons Attribution-Sharealike (CC BY-SA 3.0) license"
@@ -16,11 +16,51 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
+L HOLE H4
+U 1 1 50E489AE
+P 10750 9850
+F 0 "H4" H 10710 9675 40  0000 L CNN
+F 1 "HOLE" H 10750 10020 30  0001 C CNN
+	1    10750 9850
+	1    0    0    -1  
+$EndComp
+$Comp
+L HOLE H3
+U 1 1 50E489AA
+P 10000 9850
+F 0 "H3" H 9960 9675 40  0000 L CNN
+F 1 "HOLE" H 10000 10020 30  0001 C CNN
+	1    10000 9850
+	1    0    0    -1  
+$EndComp
+$Comp
+L HOLE H2
+U 1 1 50E489A6
+P 9250 9850
+F 0 "H2" H 9210 9675 40  0000 L CNN
+F 1 "HOLE" H 9250 10020 30  0001 C CNN
+	1    9250 9850
+	1    0    0    -1  
+$EndComp
+$Comp
+L HOLE H1
+U 1 1 50E4899F
+P 8500 9850
+F 0 "H1" H 8460 9675 40  0000 L CNN
+F 1 "HOLE" H 8500 10020 30  0001 C CNN
+	1    8500 9850
+	1    0    0    -1  
+$EndComp
+Text Notes 9250 9150 0    60   ~ 0
+Mounting holes
+Wire Notes Line
+	11450 8850 11450 11050
+$Comp
 L CONN_1 P3
 U 1 1 50E2E7E8
 P 2200 9950
 F 0 "P3" H 2280 9950 40  0000 L CNN
-F 1 "CONN_1" H 2200 10005 30  0001 C CNN
+F 1 "SCOPE" H 2200 10005 30  0000 C CNN
 	1    2200 9950
 	1    0    0    -1  
 $EndComp
@@ -29,7 +69,7 @@ L CONN_1 P2
 U 1 1 50E2E7E2
 P 2200 9600
 F 0 "P2" H 2280 9600 40  0000 L CNN
-F 1 "CONN_1" H 2200 9655 30  0001 C CNN
+F 1 "SPARE" H 2200 9655 30  0000 C CNN
 	1    2200 9600
 	1    0    0    -1  
 $EndComp
@@ -64,14 +104,14 @@ Wire Notes Line
 Wire Wire Line
 	8600 7200 8350 7200
 Wire Wire Line
-	9450 4350 9250 4350
+	9250 4350 9450 4350
 Wire Wire Line
 	9450 5000 9450 4800
 Wire Wire Line
 	9450 4800 9550 4800
 Connection ~ 11050 4950
 Wire Wire Line
-	11050 4400 11050 4950
+	11050 4950 11050 4400
 Wire Wire Line
 	11050 4400 11100 4400
 Wire Wire Line
@@ -115,7 +155,7 @@ Wire Wire Line
 Wire Wire Line
 	6050 10100 6050 10400
 Wire Wire Line
-	9450 4600 9550 4600
+	9550 4600 9450 4600
 Wire Wire Line
 	10450 5250 10150 5250
 Connection ~ 8550 5250
@@ -148,14 +188,14 @@ Wire Wire Line
 Wire Wire Line
 	5600 7700 5000 7700
 Wire Wire Line
-	6000 7600 6150 7600
+	6150 7600 6000 7600
 Connection ~ 5600 7200
 Wire Wire Line
 	5600 7300 5600 7100
 Wire Wire Line
 	5600 7100 6150 7100
 Wire Wire Line
-	5000 6650 5000 6800
+	5000 6800 5000 6650
 Connection ~ 5700 6650
 Wire Wire Line
 	5000 6250 5000 6200
@@ -178,9 +218,9 @@ Connection ~ 5000 5600
 Wire Wire Line
 	5500 5600 5000 5600
 Wire Wire Line
-	5000 6000 5000 5450
+	5000 5450 5000 6000
 Wire Wire Line
-	6150 6000 5000 6000
+	5000 6000 6150 6000
 Wire Wire Line
 	6150 5600 6000 5600
 Wire Wire Line
@@ -191,17 +231,17 @@ Wire Wire Line
 Wire Wire Line
 	6150 5800 5700 5800
 Wire Wire Line
-	6000 7950 6000 7600
+	6000 7600 6000 7950
 Wire Wire Line
 	6150 7800 6000 7800
 Connection ~ 6000 7800
 Wire Wire Line
-	6050 6650 5000 6650
+	5000 6650 6050 6650
 Connection ~ 5350 6650
 Wire Wire Line
-	5000 6900 6150 6900
+	6150 6900 5000 6900
 Wire Wire Line
-	5000 7300 5000 6900
+	5000 6900 5000 7300
 Connection ~ 5000 7200
 Wire Wire Line
 	5000 7700 5000 7850
@@ -211,7 +251,7 @@ Wire Wire Line
 	6050 5400 6050 5600
 Connection ~ 6050 5600
 Wire Wire Line
-	1500 2100 1500 2200
+	1500 2200 1500 2100
 Wire Wire Line
 	1500 2100 3800 2100
 Wire Wire Line
@@ -266,7 +306,7 @@ Connection ~ 6350 2650
 Wire Wire Line
 	6350 2550 6350 2650
 Wire Wire Line
-	6100 2650 6100 2550
+	6100 2550 6100 2650
 Connection ~ 6900 1250
 Wire Wire Line
 	6900 1250 6900 1350
@@ -274,13 +314,13 @@ Connection ~ 6350 1250
 Wire Wire Line
 	6350 1250 6350 1350
 Wire Wire Line
-	9900 2450 9600 2450
+	9600 2450 9900 2450
 Wire Wire Line
 	9900 2450 9900 1250
 Wire Wire Line
 	9900 1250 9600 1250
 Wire Wire Line
-	9700 2050 9600 2050
+	9600 2050 9700 2050
 Wire Wire Line
 	9700 2050 9700 1650
 Wire Wire Line
@@ -298,9 +338,9 @@ Connection ~ 3800 1500
 Connection ~ 1700 1500
 Connection ~ 2250 2100
 Wire Wire Line
-	7400 1650 7800 1650
+	7800 1650 7400 1650
 Wire Wire Line
-	7400 3200 7400 1650
+	7400 1650 7400 3200
 Wire Wire Line
 	9600 2650 10200 2650
 Wire Wire Line
@@ -310,7 +350,7 @@ Wire Wire Line
 Wire Wire Line
 	7400 1450 7400 1000
 Wire Wire Line
-	9800 2250 9600 2250
+	9600 2250 9800 2250
 Wire Wire Line
 	9800 2250 9800 1450
 Wire Wire Line
@@ -324,16 +364,16 @@ Wire Wire Line
 	6650 1250 6650 1350
 Connection ~ 6650 1250
 Wire Wire Line
-	7800 2650 6100 2650
+	6100 2650 7800 2650
 Wire Wire Line
 	6650 2650 6650 2550
 Connection ~ 6650 2650
 Wire Wire Line
 	7800 2050 7200 2050
 Wire Wire Line
-	7200 1900 7200 2050
+	7200 2050 7200 1900
 Wire Wire Line
-	5800 1900 7200 1900
+	7200 1900 5800 1900
 Connection ~ 6100 1800
 Connection ~ 6350 1900
 Connection ~ 6650 2000
@@ -375,9 +415,9 @@ Wire Wire Line
 Wire Wire Line
 	11850 7000 10950 7000
 Wire Wire Line
-	11700 7100 11850 7100
+	11850 7100 11700 7100
 Wire Wire Line
-	11700 7550 11700 7100
+	11700 7100 11700 7550
 Wire Wire Line
 	9900 6050 9900 6150
 Wire Wire Line
@@ -402,7 +442,7 @@ Wire Wire Line
 Wire Wire Line
 	9650 6200 8350 6200
 Wire Wire Line
-	8550 5600 8350 5600
+	8350 5600 8550 5600
 Wire Wire Line
 	8350 7500 8600 7500
 Wire Wire Line
@@ -424,7 +464,7 @@ Wire Wire Line
 Wire Wire Line
 	10750 4950 10750 5050
 Wire Wire Line
-	9450 4350 9450 4600
+	9450 4600 9450 4350
 Wire Wire Line
 	8550 5600 8550 4350
 Wire Wire Line
@@ -886,7 +926,7 @@ Text GLabel 8600 6900 2    50   Input ~ 0
 M_ENABLE
 Text GLabel 9950 1850 2    50   Input ~ 0
 M_ENABLE
-Text Notes 8700 9150 0    50   ~ 0
+Text Notes 12750 8950 0    50   ~ 0
 NOTES:\n\nPin reassignments to accomodate ISP connections (PBx)\n\nFROM      TO     ASSIGNMENT\n----------------------------------\nPB0       PC4    SCOPE - DEBUG OUTPUT\nPB1       PB0    PW\nPB2       PC1    RADIO_SLEEP\nPB3       PB1    UP\nPB4       PC2    RADIO_CTS\nPB5       PB2    DOWN\nPC0       PC5    Light Sensor\nPC1       ADC6   Trim pot\nPC2       ADC7   Battery voltage\nPC5       PC0    enable ADC inputs\n           PC3    SPARE (possible future microswitch)\n\n\n
 Text GLabel 8600 7500 2    50   Input ~ 0
 UP

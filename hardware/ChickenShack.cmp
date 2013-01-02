@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-01-19 BZR 3256)-stable date = Tue 01 Jan 2013 23:17:33 GMT
+Cmp-Mod V01 Created by CvPcb (2012-01-19 BZR 3256)-stable date = Wed 02 Jan 2013 19:28:51 GMT
 
 BeginCmp
 TimeStamp = /50E2D297;
@@ -113,6 +113,34 @@ IdModule  = SOD123;
 EndCmp
 
 BeginCmp
+TimeStamp = /50E4899F;
+Reference = H1;
+ValeurCmp = HOLE;
+IdModule  = HOLE_3.2MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E489A6;
+Reference = H2;
+ValeurCmp = HOLE;
+IdModule  = HOLE_3.2MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E489AA;
+Reference = H3;
+ValeurCmp = HOLE;
+IdModule  = HOLE_3.2MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /50E489AE;
+Reference = H4;
+ValeurCmp = HOLE;
+IdModule  = HOLE_3.2MM;
+EndCmp
+
+BeginCmp
 TimeStamp = /50E1C24F;
 Reference = ISP1;
 ValeurCmp = AVR-ISP-6;
@@ -144,20 +172,20 @@ BeginCmp
 TimeStamp = /4C4CA5B0;
 Reference = P1;
 ValeurCmp = BATTERY;
-IdModule  = ;
+IdModule  = SCREW_TERMINAL_2.54MM_X4;
 EndCmp
 
 BeginCmp
 TimeStamp = /50E2E7E2;
 Reference = P2;
-ValeurCmp = CONN_1;
+ValeurCmp = SPARE;
 IdModule  = PIN_X1;
 EndCmp
 
 BeginCmp
 TimeStamp = /50E2E7E8;
 Reference = P3;
-ValeurCmp = CONN_1;
+ValeurCmp = SCOPE;
 IdModule  = PIN_X1;
 EndCmp
 
@@ -172,28 +200,28 @@ BeginCmp
 TimeStamp = /4C4AB00F;
 Reference = P5;
 ValeurCmp = D_MOTOR;
-IdModule  = ;
+IdModule  = SCREW_TERMINAL_2.54MM_X4;
 EndCmp
 
 BeginCmp
 TimeStamp = /50E1A383;
 Reference = P6;
 ValeurCmp = LIGHT;
-IdModule  = ;
+IdModule  = SCREW_TERMINAL_2.54MM_X2;
 EndCmp
 
 BeginCmp
 TimeStamp = /50E19FF7;
 Reference = P7;
 ValeurCmp = D_SENSOR;
-IdModule  = ;
+IdModule  = SCREW_TERMINAL_2.54MM_X4;
 EndCmp
 
 BeginCmp
 TimeStamp = /50E1A12C;
 Reference = P8;
 ValeurCmp = D_SWITCH;
-IdModule  = ;
+IdModule  = SCREW_TERMINAL_2.54MM_X4;
 EndCmp
 
 BeginCmp
@@ -256,7 +284,7 @@ BeginCmp
 TimeStamp = /50E1A50E;
 Reference = RV1;
 ValeurCmp = POT;
-IdModule  = ;
+IdModule  = TRIMPOT_4MM;
 EndCmp
 
 BeginCmp
