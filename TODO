@@ -6,5 +6,5 @@ firmware:
 hardware:
 
  - possible swap to TB6612FNG SMD IC (replace Sparkfun breakout module)
- - footprints: extend outline of TB6612FNG breakout, add outline to SMD trimpot DONE
- - swap SPARE to 2 way connector, screw terminal footprint DONE
+ - add test points to schematic DONE
+

@@ -1,6 +1,6 @@
-update=Mon 31 Dec 2012 10:18:47 GMT
+update=Sat 05 Jan 2013 13:03:05 GMT
 version=1
-last_client=eeschema
+last_client=kicad
 [cvpcb]
 version=1
 NetIExt=net
@@ -27,8 +27,6 @@ LastNetListRead=ChickenShack.net
 [pcbnew/libraries]
 LibDir=../../Library;/usr/share/kicad/modules
 LibName1=dresco
-[general]
-version=1
 [eeschema]
 version=1
 LibDir=../../Library;/usr/share/kicad/library
@@ -62,3 +60,5 @@ RptLab=1
 LabSize=60
 [eeschema/libraries]
 LibName1=dresco
+[general]
+version=1
