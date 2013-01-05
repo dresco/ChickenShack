@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-01-19 BZR 3256)-stable date = Wed 02 Jan 2013 19:28:51 GMT
+Cmp-Mod V01 Created by CvPcb (2012-01-19 BZR 3256)-stable date = Fri 04 Jan 2013 23:26:43 GMT
 
 BeginCmp
 TimeStamp = /50E2D297;
@@ -176,10 +176,10 @@ IdModule  = SCREW_TERMINAL_2.54MM_X4;
 EndCmp
 
 BeginCmp
-TimeStamp = /50E2E7E2;
+TimeStamp = /50E760BE;
 Reference = P2;
-ValeurCmp = SPARE;
-IdModule  = PIN_X1;
+ValeurCmp = D_SW2;
+IdModule  = SCREW_TERMINAL_2.54MM_X2;
 EndCmp
 
 BeginCmp
