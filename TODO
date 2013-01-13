@@ -2,9 +2,12 @@
 firmware:
 
  - pin re-assignments following SMD re-design
+ - conditionally exclude all 32kHz crystal code, wakeup from watchdog?
 
 hardware:
 
  - possible swap to TB6612FNG SMD IC (replace Sparkfun breakout module)
  - add test points to schematic DONE
+ - ISP connector a bit tight to the edge of the Xbee board,
+   move to allow some more clearance for cable header
 
