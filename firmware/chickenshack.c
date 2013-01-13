@@ -31,10 +31,12 @@
 #include <string.h>
 #include <avr/io.h>
 #include <avr/sleep.h>
-#include <avr/wdt.h>
+//#include <avr/wdt.h>										// commented out while we're using the alt interrupt routines
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "osccal.h"
+#include "wd.h"												// Alternative watchdog routines for interrupt support
+															// (temporary workaround for failed aysnc timer)
 
 #define SETBIT(ADDRESS,BIT) (ADDRESS |= (1<<BIT))
 #define CLEARBIT(ADDRESS,BIT) (ADDRESS &= ~(1<<BIT))
@@ -42,7 +44,23 @@
 #define CHECKBIT(ADDRESS,BIT) (ADDRESS & (1<<BIT))
 #define nop() asm volatile("nop")
 
+//#define TEMPERATURE_ENABLED									// Comment out to remove experimental temperature reporting
+//#define TEMPERATURE_OFFSET			343						// Convert K to C, plus manually adjusted for offset
+//#define RUNTIME_OSCCAL										// Comment out to remove runtime OSCCAL calibration via 32kHz crystal
+																//   - if the crystal circuit fails, we may never get past the initial
+																//     calibration routine and therefore never setup the watchdog timer
+																//     FIXME: try to move the watchdog setup before the initial calibration
+#define WATCHDOG_TIMER											// Workaround for failing 32kHz crystal. Removes all use of async timer2
+																//  and instead uses a 1s watchdog interrupt for timekeeping. Note that
+																//  we are disabling watchdog reset functionality while in this mode.
+
+
+#ifdef WATCHDOG_TIMER
+#define TICK_INTERVAL 1										// watchdog interrupt timer fires every 1 second
+#else
 #define TICK_INTERVAL 5										// timer 2 fires every 5 seconds
+#endif
+
 #define PROCESSING_INTERVAL 300								// process main loop every 300 seconds (5 min)
 #define MAX_TIMER_TICKS (PROCESSING_INTERVAL / TICK_INTERVAL)
 #define ADC_SAMPLES 3										// number of ADC readings to average
@@ -53,13 +71,6 @@
 #define DOOR_INTERVAL_ITERATIONS	96 						// Processing intervals must elapse between door events - 8hrs
 #define DEBUG_ENABLED (!(PIND & (1 << 7)))
 
-//#define TEMPERATURE_ENABLED									// Comment out to remove experimental temperature reporting
-//#define TEMPERATURE_OFFSET			343						// Convert K to C, plus manually adjusted for offset
-//#define RUNTIME_OSCCAL										// Comment out to remove runtime OSCCAL calibration via 32kHz crystal
-																//   - if the crystal circuit fails, we may never get past the initial
-																//     calibration routine and therefore never setup the watchdog timer
-																//     FIXME: try to move the watchdog setup before the initial calibration
-
 #define DAY		0											// time_of_day
 #define NIGHT	1
 #define NOTHING	0											// door_action
@@ -69,8 +80,8 @@
 #define BOTTOM	1
 #define UNKNOWN	2
 
-volatile uint8_t  timer_tick, timer_interval;
-volatile uint16_t counter;
+volatile uint8_t  timer_interval;
+volatile uint16_t timer_tick, counter;
 
 // Disable the watchdog timer before entering main(). The atmega88 has 'new style' watchdog that
 // remains running after reset, using the quickest prescaler (15ms timeout).
@@ -295,6 +306,7 @@ void USART_SendString(char* StringPtr)
 	EnableRadio(0);
 }
 
+#ifndef WATCHDOG_TIMER
 void TimerSetup(void)
 {
 	//
@@ -334,6 +346,7 @@ void TimerSetup(void)
 	// Enable CTC interrupt
 	TIMSK2 |= (1 << OCIE2A);
 }
+#endif
 
 uint8_t DoorControl(uint8_t action)
 {
@@ -481,6 +494,7 @@ void UnsignedToDecimalString4(uint16_t input, char * output_string)
 	}
 }
 
+#ifndef WATCHDOG_TIMER
 ISR(TIMER2_COMPA_vect)
 {
 	PORTB ^= (1 << 0);										// Toggle the debug LED on port B0
@@ -497,6 +511,18 @@ ISR(TIMER2_COMPA_vect)
 		 timer_interval = 1;
 	}
 }
+#else
+ISR (WDT_vect)
+{
+	PORTB ^= (1 << 0);										// Toggle the debug LED on port B0
+
+	if ((++timer_tick == MAX_TIMER_TICKS))					// If we have reached sampling interval,
+	{
+		 timer_tick = 0;
+		 timer_interval = 1;
+	}
+}
+#endif
 
 ISR(PCINT2_vect)
 {
@@ -574,12 +600,20 @@ int main (void)
 	OSCCAL = 113;											// Typical historical value
 #endif
 
+#ifndef WATCHDOG_TIMER
 	TimerSetup();											// Restart timer 2 - async
+#endif
 
 	USART_Setup();
 	PinChangeIntSetup();
 	set_sleep_mode(SLEEP_MODE_PWR_SAVE);					// Set POWER SAVE sleep mode
+
+#ifndef WATCHDOG_TIMER
 	wdt_enable(WDTO_8S);									// Enable watchdog timer - 8 second timeout...
+#else
+	WD_SET(WD_IRQ,WDTO_1S);									// Enable watchdog timer in interrupt mode - 1 second timeout...
+#endif
+
 	sei();													// Enable global interrupts
 
 	if (DEBUG_ENABLED)
@@ -607,10 +641,12 @@ int main (void)
 			OSCCAL_Calibrate();
 #endif
 
+#ifndef WATCHDOG_TIMER
 			// Restart timer2
 			//  - Note: We lose a bit of time here with the recalibration, but have
 			//	optimised the recalibration routine - so minimal impact
 			TimerSetup();
+#endif
 
 			// Get ADC readings
 			ADCRead(&adc0, &adc1, &adc2, &adc8);
@@ -734,10 +770,12 @@ int main (void)
 			}
 		}
 
+#ifndef WATCHDOG_TIMER
 		// Sleeping too quickly after waking from aysnc clock causes issues, so re-write
 		// the CTC value and wait for OCR2AUB to clear before re-entering sleep mode
 		OCR2A = 0x9F;
 		while (ASSR & (1 << OCR2AUB));
+#endif
 
 		// Disable pullups on door/debug sensors (save power while sleeping)
 		EnablePinPullups(0);
