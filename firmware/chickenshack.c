@@ -29,12 +29,12 @@
 // timer2 - 5 sec - periodic wakeup (clocked from 32.768 crystal)
 //
 // PORT B0 - output - motor control - (timer1a output compare)
-// PORT B2 - output - radio sleep select
 // PORT B3 - output - motor direction control - up
 // PORT B4 - input  - radio CTS status
 // PORT B5 - output - motor direction control - down
 //
 // PORT C0   - input  - ADC0 is ambient light level voltage
+// PORT C1   - output - radio sleep select
 // PORT C4   - output - debug LED
 // PORT C5   - output - enable voltage dividers
 // PORT ADC6 - input  - ADC6 is light threshold voltage (trim pot)
@@ -268,7 +268,7 @@ void EnableRadio(int enable)
 	if (enable)
 	{
 		 // Power up the Xbee module
-		 PORTB &= ~(1 << 2);								// De-assert port B2 to power radio on
+		 PORTC &= ~(1 << 1);								// De-assert port C1 to power radio on
 
 		 // Wait for module to be ready (CTS)
 		 while((PINB & (1<<4)));							// Wait until port B4 (CTS) goes low
@@ -276,7 +276,7 @@ void EnableRadio(int enable)
 	else
 	{
 		 // Power down the Xbee
-		 PORTB |= (1 << 2);									// Assert port B2 to power radio down
+		 PORTC |= (1 << 1);									// Assert port C1 to power radio down
 	}
 }
 
@@ -440,13 +440,13 @@ void PinConfig(void)
 {
 	// PIN CONFIGURATION
 	DDRB |= (1 << 0);										// Set port B0 as output for motor control (not required if using timer pwm)
-	DDRB |= (1 << 2);										// Set port B2 as output for radio sleep select
 	DDRB |= (1 << 3);										// Set port B3 as output for motor direction control - up
 	DDRB |= (1 << 5);										// Set port B5 as output for motor direction control - down
+	DDRC |= (1 << 1);										// Set port C1 as output for radio sleep select
 	DDRC |= (1 << 4);										// Set port C4 as output for debug LED
 	DDRC |= (1 << 5);										// Set port C5 as output for enabling resistor dividers
 
-	PORTB |= (1 << 2);										// Assert port B2 to enable xigbee sleep
+	PORTC |= (1 << 1);										// Assert port C1 to enable xigbee sleep
 
 	// Enable pullups on switch sensors (always on)
 	PORTD |= (1 << 2);										// Enable pullup resistor on port D2 (pulled low - manual door lower)
