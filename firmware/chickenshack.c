@@ -28,7 +28,7 @@
 // 32.768 kHz watch crystal - async timer2 & oscillator calibration
 // timer2 - 5 sec - periodic wakeup (clocked from 32.768 crystal)
 //
-// PORT B1 - output - motor control - (timer1a output compare)
+// PORT B0 - output - motor control - (timer1a output compare)
 // PORT B2 - output - radio sleep select
 // PORT B3 - output - motor direction control - up
 // PORT B4 - input  - radio CTS status
@@ -404,11 +404,11 @@ uint8_t DoorControl(uint8_t action)
 		}
 
 		PORTD |= (1 << 4);									// Enable motor driver - set D4
-		PORTB |= (1 << 1);									// Enable door motor - set B1
+		PORTB |= (1 << 0);									// Enable door motor - set B0
 		_delay_ms(20);										// Wait 20ms before checking position again..
 	}
 
-	PORTB &= ~(1 << 1);										// Disable door motor - clear B1
+	PORTB &= ~(1 << 0);										// Disable door motor - clear B0
 	PORTD &= ~(1 << 4);										// Disable motor driver - clear D4
 
 	return i / 50;
@@ -434,7 +434,7 @@ void EnablePinPullups (uint8_t action)
 void PinConfig(void)
 {
 	// PIN CONFIGURATION
-	DDRB |= (1 << 1);										// Set port B1 as output for motor control (not required if using timer pwm)
+	DDRB |= (1 << 0);										// Set port B0 as output for motor control (not required if using timer pwm)
 	DDRB |= (1 << 2);										// Set port B2 as output for radio sleep select
 	DDRB |= (1 << 3);										// Set port B3 as output for motor direction control - up
 	DDRB |= (1 << 5);										// Set port B5 as output for motor direction control - down
@@ -529,18 +529,18 @@ ISR(PCINT2_vect)
 		PORTB &= ~(1 << 3);									// Door direction down - clear PB3
 		PORTB |= (1 << 5);									// Door direction down - set PB5
 		PORTD |= (1 << 4);									// Enable motor driver - set PD4
-		PORTB |= (1 << 1);									// Enable door motor - set PB1
+		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else if (!(PIND & (1 << 3)))							// Up button pressed
 	{
 		PORTB &= ~(1 << 5);									// Door direction up - clear PB5
 		PORTB |= (1 << 3);									// Door direction up - set PB3
 		PORTD |= (1 << 4);									// Enable motor driver - set PD4
-		PORTB |= (1 << 1);									// Enable door motor - set PB1
+		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else													// Neither button pressed
 	{
-		PORTB &= ~(1 << 1);									// Disable door motor - clear PB1
+		PORTB &= ~(1 << 0);									// Disable door motor - clear PB0
 		PORTD &= ~(1 << 4);									// Disable motor driver - clear PD4
 	}
 }
