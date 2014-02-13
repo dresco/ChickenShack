@@ -28,7 +28,6 @@
 // 32.768 kHz watch crystal - async timer2 & oscillator calibration
 // timer2 - 5 sec - periodic wakeup (clocked from 32.768 crystal)
 //
-// PORT B0 - output - debug LED
 // PORT B1 - output - motor control - (timer1a output compare)
 // PORT B2 - output - radio sleep select
 // PORT B3 - output - motor direction control - up
@@ -38,6 +37,7 @@
 // PORT C0 - input  - ADC0 is ambient light level voltage
 // PORT C1 - input  - ADC1 is light threshold voltage (trim pot)
 // PORT C2 - input  - ADC2 is battery voltage (via voltage divider)
+// PORT C4 - output - debug LED
 // PORT C5 - output - enable voltage dividers
 //
 // PORT D0 - input  - USART RX
@@ -434,11 +434,11 @@ void EnablePinPullups (uint8_t action)
 void PinConfig(void)
 {
 	// PIN CONFIGURATION
-	DDRB |= (1 << 0);										// Set port B0 as output for debug LED
 	DDRB |= (1 << 1);										// Set port B1 as output for motor control (not required if using timer pwm)
 	DDRB |= (1 << 2);										// Set port B2 as output for radio sleep select
 	DDRB |= (1 << 3);										// Set port B3 as output for motor direction control - up
 	DDRB |= (1 << 5);										// Set port B5 as output for motor direction control - down
+	DDRC |= (1 << 4);										// Set port C4 as output for debug LED
 	DDRC |= (1 << 5);										// Set port C5 as output for enabling resistor dividers
 
 	PORTB |= (1 << 2);										// Assert port B2 to enable xigbee sleep
@@ -452,7 +452,6 @@ void PinConfig(void)
 
 	//Enable pullups on unused pins
 	PORTC |= (1 << 3);							  			// Enable pullup resistor on port C3
-	PORTC |= (1 << 4);							  			// Enable pullup resistor on port C4
 }
 
 // Convert a (max) four digit unsigned int to a text string with (n)n.nn formatting
@@ -506,7 +505,7 @@ void UnsignedToDecimalString4(uint16_t input, char * output_string)
 
 ISR(TIMER2_COMPA_vect)
 {
-	PORTB ^= (1 << 0);										// Toggle the debug LED on port B0
+	PORTC ^= (1 << 4);										// Toggle the debug LED on port C4
 
 	// Watchdog debugging - do not reset watchdog if D7 pulled low
 	// if ((PIND & (1 << 7)))
