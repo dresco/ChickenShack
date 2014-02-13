@@ -1,7 +1,7 @@
 //  chickenshack.c
 //  Chickenshack -- automatic chicken house door opener
 //
-// Copyright (c) 2009 - 2013 Jon Escombe
+// Copyright (c) 2009 - 2014 Jon Escombe
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
