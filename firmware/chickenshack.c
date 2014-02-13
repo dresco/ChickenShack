@@ -34,11 +34,11 @@
 // PORT B4 - input  - radio CTS status
 // PORT B5 - output - motor direction control - down
 //
-// PORT C0 - input  - ADC0 is ambient light level voltage
-// PORT C1 - input  - ADC1 is light threshold voltage (trim pot)
-// PORT C2 - input  - ADC2 is battery voltage (via voltage divider)
-// PORT C4 - output - debug LED
-// PORT C5 - output - enable voltage dividers
+// PORT C0   - input  - ADC0 is ambient light level voltage
+// PORT C4   - output - debug LED
+// PORT C5   - output - enable voltage dividers
+// PORT ADC6 - input  - ADC6 is light threshold voltage (trim pot)
+// PORT ADC7 - input  - ADC7 is battery voltage (via voltage divider)
 //
 // PORT D0 - input  - USART RX
 // PORT D1 - output - USART TX
@@ -48,6 +48,7 @@
 // PORT D5 - input  - Door at bottom of travel
 // PORT D6 - input  - Door at top of travel
 // PORT D7 - input  - pulled low for serial debug output (every timer tick)
+//
 
 #include <stdio.h>											// Note: big hit for using sprintf (1.5K)
 #include <stdlib.h>
@@ -108,18 +109,18 @@ void get_mcusr(void)
   wdt_disable();
 }
 
-void ADCRead (uint16_t* chan0, uint16_t* chan1, uint16_t* chan2, uint16_t* chan8)
+void ADCRead (uint16_t* chan0, uint16_t* chan6, uint16_t* chan7, uint16_t* chan8)
 {
 	static uint16_t average_adc0[ADC_SAMPLES];
-	static uint16_t average_adc1[ADC_SAMPLES];
-	static uint16_t average_adc2[ADC_SAMPLES];
+	static uint16_t average_adc6[ADC_SAMPLES];
+	static uint16_t average_adc7[ADC_SAMPLES];
 #ifdef TEMPERATURE_ENABLED
 	static uint16_t average_adc8[ADC_SAMPLES];
 #endif
 
 	static uint8_t	average_adc0_index = 0;
-	static uint8_t	average_adc1_index = 0;
-	static uint8_t	average_adc2_index = 0;
+	static uint8_t	average_adc6_index = 0;
+	static uint8_t	average_adc7_index = 0;
 #ifdef TEMPERATURE_ENABLED
 	static uint8_t	average_adc8_index = 0;
 #endif
@@ -155,53 +156,57 @@ void ADCRead (uint16_t* chan0, uint16_t* chan1, uint16_t* chan2, uint16_t* chan8
 
 	*chan0 = average_adc_result;							// Save conversion result
 
-	// Channel 1
+	// Channel 6
 	ADMUX  &= ~(1 << MUX0);									// Clear MUX bits
 	ADMUX  &= ~(1 << MUX1);									//
 	ADMUX  &= ~(1 << MUX2);									//
 	ADMUX  &= ~(1 << MUX3);									//
 
-	ADMUX  |= (1 << MUX0);									// Set MUX0 - channel 1
+	ADMUX  |= (1 << MUX1);									// Set MUX1 - channel 6
+	ADMUX  |= (1 << MUX2);									// Set MUX2 - channel 6
 	ADCSRA |= (1 << ADSC);									// Start ADC conversion
 	while(ADCSRA & (1<<ADSC));								// Wait for conversion to finish
 
 	// average out the readings
-	average_adc1[average_adc1_index++] = ADC;
+	average_adc6[average_adc6_index++] = ADC;
 
-	if (average_adc1_index >= ADC_SAMPLES)
-		average_adc1_index = 0;
+	if (average_adc6_index >= ADC_SAMPLES)
+		average_adc6_index = 0;
 
 	average_adc_sum = 0;
 	for (average_adc_count = 0; average_adc_count < ADC_SAMPLES;  average_adc_count++)
-	   average_adc_sum = average_adc_sum + average_adc1[average_adc_count];
+	   average_adc_sum = average_adc_sum + average_adc6[average_adc_count];
 
 	average_adc_result = average_adc_sum / ADC_SAMPLES;
 
-	*chan1 = average_adc_result;							// Save conversion result
+	*chan6 = average_adc_result;							// Save conversion result
 
-	// Channel 2
+	// Channel 7
 	ADMUX  &= ~(1 << MUX0);									// Clear MUX bits
 	ADMUX  &= ~(1 << MUX1);									//
 	ADMUX  &= ~(1 << MUX2);									//
 	ADMUX  &= ~(1 << MUX3);									//
 
-	ADMUX  |= (1 << MUX1);									// Set MUX1 - channel 2
+	ADMUX  |= (1 << MUX0);									// Set MUX0 - channel 7
+	ADMUX  |= (1 << MUX1);									// Set MUX1 - channel 7
+	ADMUX  |= (1 << MUX2);									// Set MUX2 - channel 7
 	ADCSRA |= (1 << ADSC);									// Start ADC conversion
 	while(ADCSRA & (1<<ADSC));								// Wait for conversion to finish
 
 	// average out the readings
-	average_adc2[average_adc2_index++] = ADC;
+	average_adc7[average_adc7_index++] = ADC;
 
-	if (average_adc2_index >= ADC_SAMPLES)
-		average_adc2_index = 0;
+	if (average_adc7_index >= ADC_SAMPLES)
+		average_adc7_index = 0;
 
 	average_adc_sum = 0;
 	for (average_adc_count = 0; average_adc_count < ADC_SAMPLES;  average_adc_count++)
-	   average_adc_sum = average_adc_sum + average_adc2[average_adc_count];
+	   average_adc_sum = average_adc_sum + average_adc7[average_adc_count];
 
 	average_adc_result = average_adc_sum / ADC_SAMPLES;
 
-	*chan2 = average_adc_result;							// Save conversion result
+	*chan7 = average_adc_result;							// Save conversion result
+
 
 #ifdef TEMPERATURE_ENABLED
 	// Channel 8 - on chip temperature measurement
@@ -549,7 +554,7 @@ int main (void)
 {
 	char Buffer[64];
 	uint8_t time_of_day, door_position, door_action_time, door_action = NOTHING;
-	uint16_t adc0, adc1, adc2, adc8 = 0;						// raw ADC readings
+	uint16_t adc0, adc6, adc7, adc8 = 0;						// raw ADC readings
 	uint16_t i, battery;
 	uint16_t door_interval_countdown = 0;
 	char str_batteryV[5];
@@ -570,12 +575,12 @@ int main (void)
 
 	// Get initial ADC readings, call enough times to pre-fill the averaging arrays
 	for (i=0; i < ADC_SAMPLES; i++)
-		ADCRead(&adc0, &adc1, &adc2, &adc8);
+		ADCRead(&adc0, &adc6, &adc7, &adc8);
 
 	// Set initial state from light sensor
 	//  - Use the door position sensors to determine initial door position, and raise/lower as necessary
 	// FIXME: ADC check reversed for sensor layout on 1.01 board
-	if (adc0 < adc1)
+	if (adc0 < adc6)
 	{
 		time_of_day = DAY;
 		door_action_time = DoorControl(RAISE);				// Won't move if already in position
@@ -614,7 +619,7 @@ int main (void)
 
 	if (DEBUG_ENABLED)
 	{
-		sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc1, adc2, adc8);
+		sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc6, adc7, adc8);
 		USART_SendString(Buffer);
 	}
 
@@ -635,7 +640,7 @@ int main (void)
 			TimerSetup();
 
 			// Get ADC readings
-			ADCRead(&adc0, &adc1, &adc2, &adc8);
+			ADCRead(&adc0, &adc6, &adc7, &adc8);
 
 			// Calculate a voltage from the battery value
 			// 0 = 0v, 1023 = 3.3v ADC reference
@@ -643,7 +648,7 @@ int main (void)
 			// Expecting battery voltage up to ~12v, so use 18k:6k7 voltage divider
 			//  giving us 0 = 0v, 1023 = 3.3v, therefore v = ADC / 85
 			//
-			battery = (adc2 * 100UL) / 85;
+			battery = (adc7 * 100UL) / 85;
 
 			// Format the voltage as a string with two decimal places..
 			UnsignedToDecimalString4(battery, str_batteryV);
@@ -666,7 +671,7 @@ int main (void)
 			{
 				sprintf(Buffer, "DEBUG: F_CPU: %lu, OSCCAL: %i, MCUSR: %i\n", F_CPU, OSCCAL, mcusr_mirror);
 				USART_SendString(Buffer);
-				sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc1, adc2, adc8);
+				sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc6, adc7, adc8);
 				USART_SendString(Buffer);
 #ifdef TEMPERATURE_ENABLED
 				sprintf(Buffer, "DEBUG: battery voltage: %s, time of day: %i, temperature: %i%cC\n", str_batteryV, time_of_day, temperature, 0xf8);
@@ -711,14 +716,14 @@ int main (void)
 			{
 				// Has light sensor crossed threshold ?
 				// FIXME: ADC check reversed for sensor layout on 1.01 board
-				if ((time_of_day == DAY) && (adc0 > adc1))
+				if ((time_of_day == DAY) && (adc0 > adc6))
 				{
 					// time for bed ;)
 					time_of_day = NIGHT;
 					door_action = LOWER;
 				}
 				// FIXME: ADC check reversed for sensor layout on 1.01 board
-				else if ((time_of_day == NIGHT) && (adc0 < adc1))
+				else if ((time_of_day == NIGHT) && (adc0 < adc6	))
 				{
 					// rise and shine ;)
 					time_of_day = DAY;
