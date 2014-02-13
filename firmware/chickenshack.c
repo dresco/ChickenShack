@@ -29,7 +29,7 @@
 // timer2 - 5 sec - periodic wakeup (clocked from 32.768 crystal)
 //
 // PORT B0 - output - motor control - (timer1a output compare)
-// PORT B3 - output - motor direction control - up
+// PORT B1 - output - motor direction control - up
 // PORT B4 - input  - radio CTS status
 // PORT B5 - output - motor direction control - down
 //
@@ -373,7 +373,7 @@ uint8_t DoorControl(uint8_t action)
 		if (!(PIND & (1 << 5)))								// Already at bottom of travel
 			return 0;
 
-		PORTB &= ~(1 << 3);									// Door direction down - clear B3
+		PORTB &= ~(1 << 1);									// Door direction down - clear B1
 		PORTB |= (1 << 5);									// Door direction down - set B5
 	}
 	if (action == RAISE)
@@ -382,7 +382,7 @@ uint8_t DoorControl(uint8_t action)
 			return 0;
 
 		PORTB &= ~(1 << 5);									// Door direction up - clear B5
-		PORTB |= (1 << 3);									// Door direction up - set B3
+		PORTB |= (1 << 1);									// Door direction up - set B1
 	}
 
 	if (action == LOWER)
@@ -440,7 +440,7 @@ void PinConfig(void)
 {
 	// PIN CONFIGURATION
 	DDRB |= (1 << 0);										// Set port B0 as output for motor control (not required if using timer pwm)
-	DDRB |= (1 << 3);										// Set port B3 as output for motor direction control - up
+	DDRB |= (1 << 1);										// Set port B1 as output for motor direction control - up
 	DDRB |= (1 << 5);										// Set port B5 as output for motor direction control - down
 	DDRC |= (1 << 1);										// Set port C1 as output for radio sleep select
 	DDRC |= (1 << 4);										// Set port C4 as output for debug LED
@@ -531,7 +531,7 @@ ISR(PCINT2_vect)
 	// as long as we reliably get a button release at the end !!
 	if (!(PIND & (1 << 2)))									// Down button pressed
 	{
-		PORTB &= ~(1 << 3);									// Door direction down - clear PB3
+		PORTB &= ~(1 << 1);									// Door direction down - clear PB1
 		PORTB |= (1 << 5);									// Door direction down - set PB5
 		PORTD |= (1 << 4);									// Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
@@ -539,7 +539,7 @@ ISR(PCINT2_vect)
 	else if (!(PIND & (1 << 3)))							// Up button pressed
 	{
 		PORTB &= ~(1 << 5);									// Door direction up - clear PB5
-		PORTB |= (1 << 3);									// Door direction up - set PB3
+		PORTB |= (1 << 1);									// Door direction up - set PB1
 		PORTD |= (1 << 4);									// Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
