@@ -30,7 +30,7 @@
 //
 // PORT B0 - output - motor control - (timer1a output compare)
 // PORT B1 - output - motor direction control - up
-// PORT B5 - output - motor direction control - down
+// PORT B2 - output - motor direction control - down
 //
 // PORT C0   - input  - ADC0 is ambient light level voltage
 // PORT C1   - output - radio sleep select
@@ -374,14 +374,14 @@ uint8_t DoorControl(uint8_t action)
 			return 0;
 
 		PORTB &= ~(1 << 1);									// Door direction down - clear B1
-		PORTB |= (1 << 5);									// Door direction down - set B5
+		PORTB |= (1 << 2);									// Door direction down - set B2
 	}
 	if (action == RAISE)
 	{
 		if (!(PIND & (1 << 6)))								// Already at top of travel
 			return 0;
 
-		PORTB &= ~(1 << 5);									// Door direction up - clear B5
+		PORTB &= ~(1 << 2);									// Door direction up - clear B2
 		PORTB |= (1 << 1);									// Door direction up - set B1
 	}
 
@@ -441,7 +441,7 @@ void PinConfig(void)
 	// PIN CONFIGURATION
 	DDRB |= (1 << 0);										// Set port B0 as output for motor control (not required if using timer pwm)
 	DDRB |= (1 << 1);										// Set port B1 as output for motor direction control - up
-	DDRB |= (1 << 5);										// Set port B5 as output for motor direction control - down
+	DDRB |= (1 << 2);										// Set port B2 as output for motor direction control - down
 	DDRC |= (1 << 1);										// Set port C1 as output for radio sleep select
 	DDRC |= (1 << 4);										// Set port C4 as output for debug LED
 	DDRC |= (1 << 5);										// Set port C5 as output for enabling resistor dividers
@@ -532,13 +532,13 @@ ISR(PCINT2_vect)
 	if (!(PIND & (1 << 2)))									// Down button pressed
 	{
 		PORTB &= ~(1 << 1);									// Door direction down - clear PB1
-		PORTB |= (1 << 5);									// Door direction down - set PB5
+		PORTB |= (1 << 2);									// Door direction down - set PB2
 		PORTD |= (1 << 4);									// Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else if (!(PIND & (1 << 3)))							// Up button pressed
 	{
-		PORTB &= ~(1 << 5);									// Door direction up - clear PB5
+		PORTB &= ~(1 << 2);									// Door direction up - clear PB2
 		PORTB |= (1 << 1);									// Door direction up - set PB1
 		PORTD |= (1 << 4);									// Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
