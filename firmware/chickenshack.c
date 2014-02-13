@@ -30,11 +30,11 @@
 //
 // PORT B0 - output - motor control - (timer1a output compare)
 // PORT B1 - output - motor direction control - up
-// PORT B4 - input  - radio CTS status
 // PORT B5 - output - motor direction control - down
 //
 // PORT C0   - input  - ADC0 is ambient light level voltage
 // PORT C1   - output - radio sleep select
+// PORT C2   - input  - radio CTS status
 // PORT C4   - output - debug LED
 // PORT C5   - output - enable voltage dividers
 // PORT ADC6 - input  - ADC6 is light threshold voltage (trim pot)
@@ -271,7 +271,7 @@ void EnableRadio(int enable)
 		 PORTC &= ~(1 << 1);								// De-assert port C1 to power radio on
 
 		 // Wait for module to be ready (CTS)
-		 while((PINB & (1<<4)));							// Wait until port B4 (CTS) goes low
+		 while((PINC & (1<<2)));							// Wait until port C2 (CTS) goes low
 	}
 	else
 	{
