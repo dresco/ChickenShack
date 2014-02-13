@@ -32,11 +32,11 @@
 // PORT B1 - output - motor direction control - up
 // PORT B2 - output - motor direction control - down
 //
-// PORT C0   - input  - ADC0 is ambient light level voltage
+// PORT C0   - output - enable voltage dividers
 // PORT C1   - output - radio sleep select
 // PORT C2   - input  - radio CTS status
 // PORT C4   - output - debug LED
-// PORT C5   - output - enable voltage dividers
+// PORT C5   - input  - ADC5 is ambient light level voltage
 // PORT ADC6 - input  - ADC6 is light threshold voltage (trim pot)
 // PORT ADC7 - input  - ADC7 is battery voltage (via voltage divider)
 //
@@ -109,16 +109,16 @@ void get_mcusr(void)
   wdt_disable();
 }
 
-void ADCRead (uint16_t* chan0, uint16_t* chan6, uint16_t* chan7, uint16_t* chan8)
+void ADCRead (uint16_t* chan5, uint16_t* chan6, uint16_t* chan7, uint16_t* chan8)
 {
-	static uint16_t average_adc0[ADC_SAMPLES];
+	static uint16_t average_adc5[ADC_SAMPLES];
 	static uint16_t average_adc6[ADC_SAMPLES];
 	static uint16_t average_adc7[ADC_SAMPLES];
 #ifdef TEMPERATURE_ENABLED
 	static uint16_t average_adc8[ADC_SAMPLES];
 #endif
 
-	static uint8_t	average_adc0_index = 0;
+	static uint8_t	average_adc5_index = 0;
 	static uint8_t	average_adc6_index = 0;
 	static uint8_t	average_adc7_index = 0;
 #ifdef TEMPERATURE_ENABLED
@@ -129,32 +129,34 @@ void ADCRead (uint16_t* chan0, uint16_t* chan6, uint16_t* chan7, uint16_t* chan8
 	uint16_t		average_adc_result;
 	uint8_t			average_adc_count;
 
-	PORTC |= (1 << 5);										// Assert C5 to enable resistor dividers
+	PORTC |= (1 << 0);										// Assert C0 to enable resistor dividers
 
 	ADCSRA |= (1 << ADEN);									// Enable the ADC
 
-	// Channel 0
+	// Channel 5
 	ADMUX  &= ~(1 << MUX0);									// Clear MUX bits
 	ADMUX  &= ~(1 << MUX1);									//
 	ADMUX  &= ~(1 << MUX2);									//
 	ADMUX  &= ~(1 << MUX3);									//
 
+	ADMUX  |= (1 << MUX0);									// Set MUX0 - channel 5
+	ADMUX  |= (1 << MUX2);									// Set MUX2 - channel 5
 	ADCSRA |= (1 << ADSC);									// Start ADC conversion
 	while(ADCSRA & (1<<ADSC));								// Wait for conversion to finish
 
 	// average out the readings
-	average_adc0[average_adc0_index++] = ADC;
+	average_adc5[average_adc5_index++] = ADC;
 
-	if (average_adc0_index >= ADC_SAMPLES)
-		average_adc0_index = 0;
+	if (average_adc5_index >= ADC_SAMPLES)
+		average_adc5_index = 0;
 
 	average_adc_sum = 0;
 	for (average_adc_count = 0; average_adc_count < ADC_SAMPLES;  average_adc_count++)
-	   average_adc_sum = average_adc_sum + average_adc0[average_adc_count];
+	   average_adc_sum = average_adc_sum + average_adc5[average_adc_count];
 
 	average_adc_result = average_adc_sum / ADC_SAMPLES;
 
-	*chan0 = average_adc_result;							// Save conversion result
+	*chan5 = average_adc_result;							// Save conversion result
 
 	// Channel 6
 	ADMUX  &= ~(1 << MUX0);									// Clear MUX bits
@@ -254,7 +256,7 @@ void ADCRead (uint16_t* chan0, uint16_t* chan6, uint16_t* chan7, uint16_t* chan8
 
 	ADCSRA &= ~(1 << ADEN);									// Disable the ADC
 
-	PORTC &= ~(1 << 5);										// Clear C5 to disable resistor dividers
+	PORTC &= ~(1 << 0);										// Clear C0 to disable resistor dividers
 }
 
 void PinChangeIntSetup(void)
@@ -442,9 +444,9 @@ void PinConfig(void)
 	DDRB |= (1 << 0);										// Set port B0 as output for motor control (not required if using timer pwm)
 	DDRB |= (1 << 1);										// Set port B1 as output for motor direction control - up
 	DDRB |= (1 << 2);										// Set port B2 as output for motor direction control - down
+	DDRC |= (1 << 0);										// Set port C0 as output for enabling resistor dividers
 	DDRC |= (1 << 1);										// Set port C1 as output for radio sleep select
 	DDRC |= (1 << 4);										// Set port C4 as output for debug LED
-	DDRC |= (1 << 5);										// Set port C5 as output for enabling resistor dividers
 
 	PORTC |= (1 << 1);										// Assert port C1 to enable xigbee sleep
 
@@ -554,7 +556,7 @@ int main (void)
 {
 	char Buffer[64];
 	uint8_t time_of_day, door_position, door_action_time, door_action = NOTHING;
-	uint16_t adc0, adc6, adc7, adc8 = 0;						// raw ADC readings
+	uint16_t adc5, adc6, adc7, adc8 = 0;						// raw ADC readings
 	uint16_t i, battery;
 	uint16_t door_interval_countdown = 0;
 	char str_batteryV[5];
@@ -575,12 +577,12 @@ int main (void)
 
 	// Get initial ADC readings, call enough times to pre-fill the averaging arrays
 	for (i=0; i < ADC_SAMPLES; i++)
-		ADCRead(&adc0, &adc6, &adc7, &adc8);
+		ADCRead(&adc5, &adc6, &adc7, &adc8);
 
 	// Set initial state from light sensor
 	//  - Use the door position sensors to determine initial door position, and raise/lower as necessary
 	// FIXME: ADC check reversed for sensor layout on 1.01 board
-	if (adc0 < adc6)
+	if (adc5 < adc6)
 	{
 		time_of_day = DAY;
 		door_action_time = DoorControl(RAISE);				// Won't move if already in position
@@ -619,7 +621,7 @@ int main (void)
 
 	if (DEBUG_ENABLED)
 	{
-		sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc6, adc7, adc8);
+		sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc5, adc6, adc7, adc8);
 		USART_SendString(Buffer);
 	}
 
@@ -640,7 +642,7 @@ int main (void)
 			TimerSetup();
 
 			// Get ADC readings
-			ADCRead(&adc0, &adc6, &adc7, &adc8);
+			ADCRead(&adc5, &adc6, &adc7, &adc8);
 
 			// Calculate a voltage from the battery value
 			// 0 = 0v, 1023 = 3.3v ADC reference
@@ -671,7 +673,7 @@ int main (void)
 			{
 				sprintf(Buffer, "DEBUG: F_CPU: %lu, OSCCAL: %i, MCUSR: %i\n", F_CPU, OSCCAL, mcusr_mirror);
 				USART_SendString(Buffer);
-				sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc0, adc6, adc7, adc8);
+				sprintf(Buffer, "DEBUG: bright: %u, thresh: %u, batt: %u, temp: %u\n", adc5, adc6, adc7, adc8);
 				USART_SendString(Buffer);
 #ifdef TEMPERATURE_ENABLED
 				sprintf(Buffer, "DEBUG: battery voltage: %s, time of day: %i, temperature: %i%cC\n", str_batteryV, time_of_day, temperature, 0xf8);
@@ -716,14 +718,14 @@ int main (void)
 			{
 				// Has light sensor crossed threshold ?
 				// FIXME: ADC check reversed for sensor layout on 1.01 board
-				if ((time_of_day == DAY) && (adc0 > adc6))
+				if ((time_of_day == DAY) && (adc5 > adc6))
 				{
 					// time for bed ;)
 					time_of_day = NIGHT;
 					door_action = LOWER;
 				}
 				// FIXME: ADC check reversed for sensor layout on 1.01 board
-				else if ((time_of_day == NIGHT) && (adc0 < adc6	))
+				else if ((time_of_day == NIGHT) && (adc5 < adc6	))
 				{
 					// rise and shine ;)
 					time_of_day = DAY;
