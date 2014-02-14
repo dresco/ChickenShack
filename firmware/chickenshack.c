@@ -600,7 +600,7 @@ int main (void)
 	// Calibrate the internal oscillator for reliable serial comms (resets timer 2)
 	OSCCAL_Calibrate();
 #else
-	OSCCAL = 113;											// Typical historical value
+	OSCCAL = 89;											// Typical historical value (89 on new board)
 #endif
 
 	TimerSetup();											// Restart timer 2 - async
