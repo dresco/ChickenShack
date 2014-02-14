@@ -5,11 +5,11 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.debug.403886964" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -51,11 +51,6 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.1864017577" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="de.innot.avreclipse.configuration.app.debug.403886964.1700824749" name="chickenshack.c" rcbsApplicability="disable" resourcePath="chickenshack.c" toolsToInvoke="de.innot.avreclipse.tool.compiler.winavr.app.debug.524073868.1976020984">
-						<tool id="de.innot.avreclipse.tool.compiler.winavr.app.debug.524073868.1976020984" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.app.debug.524073868">
-							<inputType id="de.innot.avreclipse.compiler.winavr.input.218768631" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
-						</tool>
-					</fileInfo>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -66,11 +61,11 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.release.603103850" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -112,11 +107,6 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.release.1667971732" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.release"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="de.innot.avreclipse.configuration.app.release.603103850.1793760132" name="chickenshack.c" rcbsApplicability="disable" resourcePath="chickenshack.c" toolsToInvoke="de.innot.avreclipse.tool.compiler.winavr.app.release.1513860785.314632142">
-						<tool id="de.innot.avreclipse.tool.compiler.winavr.app.release.1513860785.314632142" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.app.release.1513860785">
-							<inputType id="de.innot.avreclipse.compiler.winavr.input.961013492" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
-						</tool>
-					</fileInfo>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
