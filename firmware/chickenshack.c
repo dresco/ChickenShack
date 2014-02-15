@@ -79,10 +79,7 @@
 
 //#define TEMPERATURE_ENABLED									// Comment out to remove experimental temperature reporting
 //#define TEMPERATURE_OFFSET			343						// Convert K to C, plus manually adjusted for offset
-//#define RUNTIME_OSCCAL										// Comment out to remove runtime OSCCAL calibration via 32kHz crystal
-																//   - if the crystal circuit fails, we may never get past the initial
-																//     calibration routine and therefore never setup the watchdog timer
-																//     FIXME: try to move the watchdog setup before the initial calibration
+#define RUNTIME_OSCCAL											// Comment out to remove runtime OSCCAL calibration via 32kHz crystal
 
 #define DAY		0											// time_of_day
 #define NIGHT	1
@@ -593,7 +590,13 @@ int main (void)
 		door_action_time = DoorControl(LOWER);				// Won't move if already in position
 	}
 
-#ifdef RUNTIME_OSCCAL
+	USART_Setup();
+	PinChangeIntSetup();
+	set_sleep_mode(SLEEP_MODE_PWR_SAVE);					// Set POWER SAVE sleep mode
+	wdt_enable(WDTO_8S);									// Enable watchdog timer - 8 second timeout...
+	sei();													// Enable global interrupts
+
+	#ifdef RUNTIME_OSCCAL
 	// Initialise OSCCAL to centre point of it's range before the initial calibration
 	OSCCAL = (0x7F / 2);
 
@@ -603,13 +606,7 @@ int main (void)
 	OSCCAL = 89;											// Typical historical value (89 on new board)
 #endif
 
-	TimerSetup();											// Restart timer 2 - async
-
-	USART_Setup();
-	PinChangeIntSetup();
-	set_sleep_mode(SLEEP_MODE_PWR_SAVE);					// Set POWER SAVE sleep mode
-	wdt_enable(WDTO_8S);									// Enable watchdog timer - 8 second timeout...
-	sei();													// Enable global interrupts
+	TimerSetup();											// Restart timer 2 - async (needed for watchdog reset)
 
 	if (DEBUG_ENABLED)
 	{
