@@ -1,8 +1,9 @@
 
 firmware:
 
- - pin re-assignments following SMD re-design
- - conditionally exclude all 32kHz crystal code, wakeup from watchdog?
+ - pin re-assignments following SMD re-design DONE
+ - conditionally exclude all 32kHz crystal code, wakeup from watchdog? DONE & DONE
+ - change battery ADC constants to reflect new resistor values DONE
 
 hardware:
 
