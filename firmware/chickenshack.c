@@ -644,10 +644,10 @@ int main (void)
 			// Calculate a voltage from the battery value
 			// 0 = 0v, 1023 = 3.3v ADC reference
 			//
-			// Expecting battery voltage up to ~12v, so use 18k:6k7 voltage divider
-			//  giving us 0 = 0v, 1023 = 3.3v, therefore v = ADC / 85
+			// Expecting battery voltage up to ~6v (4xAA), so using 10k:10k voltage divider
+			//  giving us 0 = 0v, 1023 = 6.6v, therefore v = ADC / 155
 			//
-			battery = (adc7 * 100UL) / 85;
+			battery = (adc7 * 100UL) / 155;
 
 			// Format the voltage as a string with two decimal places..
 			UnsignedToDecimalString4(battery, str_batteryV);
