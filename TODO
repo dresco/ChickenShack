@@ -10,4 +10,5 @@ hardware:
  - possible swap to TB6612FNG SMD IC (replace Sparkfun breakout module)
  - ISP connector a bit tight to the edge of the Xbee board,
    move to allow some more clearance for cable header DONE
-
+ - tidy wiring loom, get rid of scotch blocks (solder & shrink wrap)
+ 
