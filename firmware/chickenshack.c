@@ -366,6 +366,23 @@ uint8_t DoorControl(uint8_t action)
 {
 	uint16_t i, target;
 
+	//
+	// Sept 2015 changes;
+	//  Door sometimes slipping down under it's own weight. Put the motor driver IC driver into
+	//  'short brake' instead of 'standby' by *not* pulling the enable input (TB6612FNG STBY)
+	//  low while the control input (TB6612FNG PWM) is low.
+	//
+	//  Note also that one or both of the direction inputs have to be high to enable the brake. If
+	//  both are low then driver output remains high impedance.
+	//
+	//  Expecting this to add ~1.5mA to the power budget.
+	/
+	//  TODO: Power optimisation - no point enabling brake when door is in lower position.
+	//
+	PORTD |= (1 << 4);									    // Enable motor driver - set D4
+	PORTB |= (1 << 1);									    // Initial state of short brake - set B1
+	PORTB |= (1 << 2);									    // Initial state of short brake - set B2
+
 	// Move the door - use the door position sensors to check position before moving
 	if (action == LOWER)
 	{
@@ -407,13 +424,11 @@ uint8_t DoorControl(uint8_t action)
 			break;
 		}
 
-		PORTD |= (1 << 4);									// Enable motor driver - set D4
 		PORTB |= (1 << 0);									// Enable door motor - set B0
 		_delay_ms(20);										// Wait 20ms before checking position again..
 	}
 
 	PORTB &= ~(1 << 0);										// Disable door motor - clear B0
-	PORTD &= ~(1 << 4);										// Disable motor driver - clear D4
 
 	return i / 50;
 }
@@ -532,20 +547,17 @@ ISR(PCINT2_vect)
 	{
 		PORTB &= ~(1 << 1);									// Door direction down - clear PB1
 		PORTB |= (1 << 2);									// Door direction down - set PB2
-		PORTD |= (1 << 4);									// Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else if (!(PIND & (1 << 3)))							// Up button pressed
 	{
 		PORTB &= ~(1 << 2);									// Door direction up - clear PB2
 		PORTB |= (1 << 1);									// Door direction up - set PB1
-		PORTD |= (1 << 4);									// Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else													// Neither button pressed
 	{
 		PORTB &= ~(1 << 0);									// Disable door motor - clear PB0
-		PORTD &= ~(1 << 4);									// Disable motor driver - clear PD4
 	}
 }
 
