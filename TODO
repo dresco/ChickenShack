@@ -11,4 +11,4 @@ hardware:
  - ISP connector a bit tight to the edge of the Xbee board,
    move to allow some more clearance for cable header DONE
  - tidy wiring loom, get rid of scotch blocks (solder & shrink wrap)
- 
+ - Source and drain on Q2 inverted in schematic! (p-channel mosfet)
