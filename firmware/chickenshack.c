@@ -90,7 +90,7 @@
 #define BOTTOM	1
 #define UNKNOWN	2
 
-volatile uint8_t  timer_tick, timer_interval, time_of_day;
+volatile uint8_t  timer_tick, timer_interval;
 volatile uint16_t counter;
 
 // Disable the watchdog timer before entering main(). The atmega88 has 'new style' watchdog that
@@ -375,9 +375,10 @@ uint8_t DoorControl(uint8_t action)
 	//  Note also that one or both of the direction inputs have to be high to enable the brake. If
 	//  both are low then driver output remains high impedance.
 	//
-	//  Expecting this to add ~1.5mA to the power budget. Do this only during day to save some power.
+	//  Expecting this to add ~1.5mA to the power budget.
+	/
+	//  TODO: Power optimisation - no point enabling brake when door is in lower position.
 	//
-
 	PORTD |= (1 << 4);									    // Enable motor driver - set D4
 	PORTB |= (1 << 1);									    // Initial state of short brake - set B1
 	PORTB |= (1 << 2);									    // Initial state of short brake - set B2
@@ -386,10 +387,7 @@ uint8_t DoorControl(uint8_t action)
 	if (action == LOWER)
 	{
 		if (!(PIND & (1 << 5)))								// Already at bottom of travel
-		{
-			PORTD &= ~(1 << 4);							    // Disable motor driver - must be night time
-			return 0;									    // Return early without enabling door motor
-		}
+			return 0;
 
 		PORTB &= ~(1 << 1);									// Door direction down - clear B1
 		PORTB |= (1 << 2);									// Door direction down - set B2
@@ -397,10 +395,7 @@ uint8_t DoorControl(uint8_t action)
 	if (action == RAISE)
 	{
 		if (!(PIND & (1 << 6)))								// Already at top of travel
-		{
-		                                                    // Leaving motor driver enabled - must be day time
-			return 0;									    // Return early without enabling door motor
-		}
+			return 0;
 
 		PORTB &= ~(1 << 2);									// Door direction up - clear B2
 		PORTB |= (1 << 1);									// Door direction up - set B1
@@ -434,10 +429,6 @@ uint8_t DoorControl(uint8_t action)
 	}
 
 	PORTB &= ~(1 << 0);										// Disable door motor - clear B0
-
-	//  We leave motor driver enabled unless at night (provides a brake at the cost of more power)
-	if (time_of_day == NIGHT)
-		PORTD &= ~(1 << 4);								 // Disable motor driver - clear D4
 
 	return i / 50;
 }
@@ -556,29 +547,24 @@ ISR(PCINT2_vect)
 	{
 		PORTB &= ~(1 << 1);									// Door direction down - clear PB1
 		PORTB |= (1 << 2);									// Door direction down - set PB2
-		PORTD |= (1 << 4);								    // Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else if (!(PIND & (1 << 3)))							// Up button pressed
 	{
 		PORTB &= ~(1 << 2);									// Door direction up - clear PB2
 		PORTB |= (1 << 1);									// Door direction up - set PB1
-		PORTD |= (1 << 4);								    // Enable motor driver - set PD4
 		PORTB |= (1 << 0);									// Enable door motor - set PB0
 	}
 	else													// Neither button pressed
 	{
 		PORTB &= ~(1 << 0);									// Disable door motor - clear PB0
-		//  We leave motor driver enabled unless at night (provides a brake at the cost of more power)
-		if (time_of_day == NIGHT)
-			PORTD &= ~(1 << 4);							    // Disable motor driver - clear D4
 	}
 }
 
 int main (void)
 {
 	char Buffer[64];
-	uint8_t door_position, door_action_time, door_action = NOTHING;
+	uint8_t time_of_day, door_position, door_action_time, door_action = NOTHING;
 	uint16_t adc5, adc6, adc7, adc8 = 0;						// raw ADC readings
 	uint16_t i, battery;
 	uint16_t door_interval_countdown = 0;
@@ -591,9 +577,9 @@ int main (void)
 	// Use external 32.768kHz clock instead of a crystal
 	// ASSR |= (1 << EXCLK);
 
-	// Make sure all clock division is turned off (8MHz RC clock)
-	CLKPR  = (1 << CLKPCE);
-	CLKPR  = 0x00;
+    // Make sure all clock division is turned off (8MHz RC clock)
+    CLKPR  = (1 << CLKPCE);
+    CLKPR  = 0x00;
 
 	PinConfig();											// Set pins as inputs / outputs / enable pullups etc
 	ADCSetup();
